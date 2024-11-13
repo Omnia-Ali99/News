@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('title');
-            $table->string('body');
+            $table->text('body');
             $table->string('phone');
             $table->string('ip_address');
             $table->timestamps();

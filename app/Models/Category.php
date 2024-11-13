@@ -8,7 +8,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $filable=['id','name','slug','status','created_at','updated_at'];
+    protected $fillable=['id','name','slug','status','created_at','updated_at'];
 
     public function posts()
     {

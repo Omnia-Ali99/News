@@ -9,7 +9,7 @@ class Image extends Model
 {
     use HasFactory;
 
-    protected $filable=['id','path','post_id','created_at','updated_at'];
+    protected $fillable=['id','path','post_id','created_at','updated_at'];
 
     public function post(){
         return $this->belongsTo(Post::class ,'post_id');
