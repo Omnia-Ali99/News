@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Cviebrock\EloquentSluggable\Sluggable;
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory ,Sluggable ;
     protected $filable=['id','title','slug','desc','comment_able','status','user_id','created_at','updated_at'];
 
     public function category(){
@@ -21,5 +21,13 @@ class Post extends Model
     }
     public function images(){
         return $this->hasMany(Image::class ,'post_id');
+    }
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }

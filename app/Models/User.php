@@ -27,7 +27,9 @@ class User extends Authenticatable
         'country',
         'city',
         'street',
-        'phone'
+        'phone',
+        'created_at',
+        'updated_at'
     ];
 
     /**
