@@ -554,7 +554,7 @@ button.btn:hover {
 
 .cat-news .slick-prev,
 .cat-news .slick-next {
-  top: -62px;
+  top: 20px;
   width: 28px;
   height: 28px;
   z-index: 1;
