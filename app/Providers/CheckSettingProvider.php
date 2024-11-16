@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\RelatedNewsSite;
 use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,21 +21,30 @@ class CheckSettingProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Setting::firstOr(function(){
+      $getSetting =  Setting::firstOr(function(){
             return Setting::create([
                 'site_name'=>'news',
                 'email'=>'news@gmail.com',
                 'favicon'=>'default',
-                'logo'=>'default',
-                'facebook'=>'default',
-                'twitter'=>'default',
-                'instagram'=>'default',
-                'youtube'=>'default',
+                'logo'=>'/img/logo.png',
+                'facebook'=>'https://www.facebook.com',
+                'twitter'=>'https://www.twitter.com',
+                'instagram'=>'https://www.instagram.com',
+                'youtube'=>'https://www.youtube.com',
                 'phone'=>'01234678934',
-                'country'=>'default country',
-                'city'=>'default city',
-                'street'=>'default street',
+                'country'=>'Egypt',
+                'city'=>'Alex',
+                'street'=>'25 Tosson',
             ]);
         });
+
+        //share related sites
+         $relatedSites =RelatedNewsSite::select('name','url')->get();
+          
+        view()->share([          
+        'getSetting' => $getSetting, 
+        'relatedSites'=>$relatedSites, 
+        ]);
+    
     }
 }
