@@ -52,12 +52,17 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Vivamus sed porta dui. Class aptent taciti sociosqu
               </p>
-              <form>
+              <form action="{{route('frontend.news.subscribe')}}" method="POST">
+                @csrf
                 <input
                   class="form-control"
                   type="email"
+                  name="email"
                   placeholder="Your email here"
                 />
+                @error('email')
+                  <div class="text-danger">{{$message}}</div>
+                @enderror
                 <button class="btn">Submit</button>
               </form>
             </div>
