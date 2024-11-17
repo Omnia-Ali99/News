@@ -73,11 +73,12 @@
                 href="#"
                 class="nav-link dropdown-toggle"
                 data-toggle="dropdown"
-                >Dropdown</a
+                >Categories</a
               >
               <div class="dropdown-menu">
-                <a href="#" class="dropdown-item">Sub Item 1</a>
-                <a href="#" class="dropdown-item">Sub Item 2</a>
+                @foreach ($categories as $category )
+                <a href="{{route('frontend.category.posts',$category->slug)}}" class="dropdown-item" title="{{$category->name}}">{{$category->name}}</a>
+                @endforeach
               </div>
             </div>
             <a href="single-page.html" class="nav-item nav-link"

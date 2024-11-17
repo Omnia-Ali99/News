@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
@@ -21,6 +22,7 @@ Route::group([
 ],function(){
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::post('news-subscribe',[NewsSubscriberController::class,'store'])->name('news.subscribe');
+    Route::get('category/{slug}',CategoryController::class)->name('category.posts');
 
 });
 
