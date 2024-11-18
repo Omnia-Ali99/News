@@ -11,7 +11,7 @@ class Post extends Model
     protected $fillable=['id','title','slug','desc','comment_able','status','user_id','created_at','updated_at'];
 
     public function category(){
-         $this->belongsTo(Category::class ,'category_id');
+      return  $this->belongsTo(Category::class ,'category_id');
     }
     public function user(){
       return  $this->belongsTo(User::class ,'user_id');

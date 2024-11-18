@@ -14,7 +14,7 @@
                 <div class="tn-img">
                   <img src="{{$post->images->first()->path}}" />
                   <div class="tn-title">
-                    <a href="">{{$post->title}}</a>
+                    <a href="{{route('frontend.post.show', $post->slug)}}">{{$post->title}}</a>
                   </div>
                 </div>
               </div>
@@ -31,7 +31,7 @@
                   <div class="tn-img">
                     <img src="{{$post->images->first()->path}}" />
                     <div class="tn-title">
-                      <a href="">{{$post->title}}</a>
+                      <a href="{{route('frontend.post.show', $post->slug)}}">{{$post->title}}</a>
                     </div>
                   </div>
                 </div>
@@ -49,14 +49,14 @@
           <div class="row">
            @foreach ($categories_with_posts as $category)
            <div class="col-md-6">
-            <h2>{{$category->name}}</h2>
+            <h2 class="">{{$category->name}}</h2>
             <div class="row cn-slider">
              @foreach ( $category->posts as $post )
              <div class="col-md-6">
               <div class="cn-img">
                 <img src="{{$post->images->first()->path}}" />
                 <div class="cn-title">
-                  <a href="">{{$post->title}}</a>
+                  <a href="{{route('frontend.post.show', $post->slug)}}">{{$post->title}}</a>
                 </div>
               </div>
             </div>
@@ -95,7 +95,7 @@
                       <img src="{{$post->images->first()->path}}" />
                     </div>
                     <div class="tn-title">
-                      <a href="">{{$post->title}}</a>
+                      <a href="{{route('frontend.post.show', $post->slug)}}">{{$post->title}}</a>
                     </div>
                   </div>
                 
@@ -109,7 +109,7 @@
                       <img src="{{$post->images->first()->path}}" />
                     </div>
                     <div class="tn-title">
-                      <a href="">{{$post->title}}</a>
+                      <a href="{{route('frontend.post.show', $post->slug)}}">{{$post->title}}</a>
                     </div>
                   </div>
                   @endforeach
@@ -140,7 +140,7 @@
                     <img src="{{$post->images->first()->path}}" />
                   </div>
                   <div class="tn-title">
-                    <a href="">{{$post->title}}</a>
+                    <a href="{{route('frontend.post.show', $post->slug)}}">{{$post->title}}</a>
                   </div>
                 </div>
                  @endforeach 
@@ -152,7 +152,7 @@
                       <img src="{{$post->images->first()->path}}" />
                     </div>
                     <div class="tn-title">
-                      <a href="">{{$post->title}}({{$post->num_of_views}})</a>
+                      <a href="{{route('frontend.post.show', $post->slug)}}">{{$post->title}}({{$post->num_of_views}})</a>
                     </div>
                   </div>
                   @endforeach
@@ -176,7 +176,7 @@
                 <div class="mn-img">
                   <img src="{{$post->images->first()->path}}" />
                   <div class="mn-title">
-                    <a href="">{{$post->title}}</a>
+                    <a href="{{route('frontend.post.show', $post->slug)}}">{{$post->title}}</a>
                   </div>
                 </div>
               </div>

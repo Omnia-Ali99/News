@@ -196,6 +196,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\CheckSettingProvider::class,
         App\Providers\CasheServiceProvider::class,
+        App\Providers\ViewServiceProvider::class,
+
 
     ],
 
