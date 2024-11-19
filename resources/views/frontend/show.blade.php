@@ -13,15 +13,15 @@
                     <li data-target="#newsCarousel" data-slide-to="2"></li>
                   </ol>
                   <div class="carousel-inner">
-                    @foreach ($post->images as $image )
+                    @foreach ($mainPost->images as $image )
                     <div class="carousel-item @if($loop->index==0)
                       active
                     @endif">
                       <img src="{{$image->path}}" class="d-block w-100" alt="First Slide">
                       <div class="carousel-caption d-none d-md-block">
-                        <h5>{{$post->title}}</h5>
+                        <h5>{{$mainPost->title}}</h5>
                         <p>
-                          {{substr($post->desc,0,80)}}
+                          {{substr($mainPost->desc,0,80)}}
                         </p>
                       </div>
                     </div>
@@ -39,32 +39,32 @@
                   </a>
                 </div>
                 <div class="sn-content">
-                  {{$post->desc}}
+                  {{$mainPost->desc}}
                </div>
                 <!-- Comment Section -->
                 <div class="comment-section">
                   <!-- Comment Input -->
-                  <div class="comment-input">
-                    <input type="text" placeholder="Add a comment..." id="commentBox" />
-                    <button id="addCommentBtn">Post</button>
-                  </div>
+                    <form id="commentForm">
+                      @csrf
+                      <div class="comment-input">
+                      <input name="comment" type="text" placeholder="Add a comment..." id="commentBox" />
+                      <input type="hidden" name="user_id" value="1">
+                      <input type="hidden" name="post_id" value="{{$mainPost->id}}">
+                      <button type="submit" id="addCommentBtn">Post</button>
+                    </div>
+                    </form>
   
                   <!-- Display Comments -->
                   <div class="comments">
+                    @foreach ($mainPost->comments as $comment )
                     <div class="comment">
-                      <img src="./img/news-450x350-2.jpg" alt="User Image" class="comment-img" />
+                      <img src="{{$comment->user->image}}" alt="{{$comment->user->name}}" class="comment-img" />
                       <div class="comment-content">
-                        <span class="username">User1</span>
-                        <p class="comment-text">This is an example comment.</p>
+                        <span class="username">{{$comment->user->name}}</span>
+                        <p class="comment-text">{{$comment->comment}}</p>
                       </div>
                     </div>
-                    <div class="comment">
-                      <img src="./img/news-450x350-2.jpg" alt="User Image" class="comment-img" />
-                      <div class="comment-content">
-                        <span class="username">User2</span>
-                        <p class="comment-text">This is an example comment.</p>
-                      </div>
-                    </div>
+                    @endforeach
                     <!-- Add more comments here for demonstration -->
                   </div>
   
@@ -193,3 +193,59 @@
       <!-- Single News End-->
   
 @endsection
+@push('js')
+  <script>
+    //show more comments
+    $(document).on('click','#showMoreBtn', function(e){
+      e.preventDefault();
+      $.ajax({
+        url:"{{route('frontend.post.getAllComments',$mainPost->slug)}}",
+        type:'GET',
+        success:function(data){
+          $('.comments').empty();
+          $.each(data,function(key,comment){
+            $('.comments').append(`<div class="comment">
+                      <img src="${comment.user.image}" alt="{{$comment->user->name}}" class="comment-img" />
+                      <div class="comment-content">
+                        <span class="username">${comment.user.name}</span>
+                        <p class="comment-text">${comment.comment}</p>
+                      </div>
+                    </div>
+            `);
+          });
+          $('#showMoreBtn').hide();
+        },
+
+      });
+
+    });
+    // save comments
+    $(document).on('submit','#commentForm', function(e){
+      e.preventDefault();
+      var formData = new FormData($(this)[0]);
+      $.ajax({
+        url:"{{route('frontend.post.comments.store')}}",
+        type:'POST',
+        data:formData,
+        processData: false,
+        contentType:false,
+
+        success: function(data){
+          $('.comments').prepend(`<div class="comment">
+                      <img src="${data.comment.user.image}" alt="${data.comment.user.name}" class="comment-img" />
+                      <div class="comment-content">
+                        <span class="username">${data.comment.user.name}</span>
+                        <p class="comment-text">${data.comment.comment}</p>
+                      </div>
+                    </div>`);
+        },
+        error: function(data){
+
+          }
+
+      });
+
+
+    });
+  </script>
+@endpush
