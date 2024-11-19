@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\ContactController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
@@ -27,6 +28,8 @@ Route::group([
     Route::get('post/{slug}',[PostController::class,'show'])->name('post.show');
     Route::get('post/comments/{slug}',[PostController::class,'getAllPosts'])->name('post.getAllComments');
     Route::post('post/comments/store',[PostController::class,'saveComment'])->name('post.comments.store');
+    Route::get('contact-us',[ContactController::class,'index'])->name('contact.index');
+    Route::post('contact/store',[ContactController::class,'store'])->name('contact.store');
 
 
 });

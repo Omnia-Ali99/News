@@ -85,7 +85,7 @@
               >Single Page</a
             >
             <a href="dashboard.html" class="nav-item nav-link">Dashboard</a>
-            <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+            <a href="{{route('frontend.contact.index')}}" title="Contact Us" class="nav-item nav-link">Contact Us</a>
           </div>
           <div class="social ml-auto">
             <a href="{{$getSetting->twitter}}" title="twitter"><i class="fab fa-twitter"></i></a>

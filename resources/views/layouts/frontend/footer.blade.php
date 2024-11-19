@@ -82,7 +82,7 @@
         <a href="">Cookies</a>
         <a href="">Accessibility help</a>
         <a href="">Advertise with us</a>
-        <a href="">Contact us</a>
+        <a href="{{route('frontend.contact.index')}}" title="Contact Us">Contact us</a>
       </div>
     </div>
   </div>
