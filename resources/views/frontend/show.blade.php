@@ -47,13 +47,15 @@
                     <form id="commentForm">
                       @csrf
                       <div class="comment-input">
-                      <input name="comment" type="text" placeholder="Add a comment..." id="commentBox" />
+                      <input id="commentInput" name="comment" type="text" placeholder="Add a comment..." id="commentBox" />
                       <input type="hidden" name="user_id" value="1">
                       <input type="hidden" name="post_id" value="{{$mainPost->id}}">
-                      <button type="submit" id="addCommentBtn">Post</button>
+                      <button type="submit" id="addCommentBtn">Comment</button>
                     </div>
                     </form>
-  
+                   
+                    <div id="errorMsg" class="alert alert-danger" style="display: none" role="alert">
+                    </div>
                   <!-- Display Comments -->
                   <div class="comments">
                     @foreach ($mainPost->comments as $comment )
@@ -231,6 +233,8 @@
         contentType:false,
 
         success: function(data){
+          $('#commentInput').val('');
+          $('#errorMsg').hide();
           $('.comments').prepend(`<div class="comment">
                       <img src="${data.comment.user.image}" alt="${data.comment.user.name}" class="comment-img" />
                       <div class="comment-content">
@@ -240,6 +244,8 @@
                     </div>`);
         },
         error: function(data){
+          var response = $.parseJSON(data.responseText);
+          $('#errorMsg').text(response.errors.comment).show();
 
           }
 

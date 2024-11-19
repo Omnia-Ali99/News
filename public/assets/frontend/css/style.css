@@ -864,7 +864,7 @@ button.btn:hover {
 
 .single-news .sn-slider .slick-prev,
 .single-news .sn-slider .slick-next {
-  top: -62px;
+  top: 20px;
   width: 28px;
   height: 28px;
   z-index: 1;

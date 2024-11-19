@@ -49,7 +49,7 @@ class PostController extends Controller
       if(!$comment){
         return response()->json([
             'data'=>'operation failed',
-            'status'=>403
+            'status'=>403,
         ]);
     }
     return response()->json([
