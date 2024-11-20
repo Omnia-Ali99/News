@@ -16,6 +16,6 @@ class CategoryController extends Controller
     {
         $category =Category::whereSlug($slug)->first();
         $posts = $category->posts()->paginate(9);
-        return view('frontend.category-posts', compact('posts'));
+        return view('frontend.category-posts', compact('posts','category'));
     }
 }

@@ -1,4 +1,8 @@
 @extends('layouts.frontend.app')
+@section('breadcrumb')
+  @parent
+  <li class="breadcrumb-item active">{{$category->name}}</a></li>
+@endsection
 @section('body')
       <br><br><br>
        <!-- Main News Start-->

@@ -42,6 +42,18 @@
 
 
    @include('layouts.frontend.header')
+             <!-- Breadcrumb Start -->
+ <div class="breadcrumb-wrap">
+  <div class="container">
+    <ul class="breadcrumb">
+      @section('breadcrumb')
+      <li class="breadcrumb-item"><a href="{{route('frontend.index')}}">Home</a></li>
+      @show
+    </ul>
+  </div>
+</div>
+<!-- Breadcrumb End -->
+
    @yield('body')
    @include('layouts.frontend.footer')
    

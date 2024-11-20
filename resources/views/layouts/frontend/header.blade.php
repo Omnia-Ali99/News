@@ -67,7 +67,7 @@
           id="navbarCollapse"
         >
           <div class="navbar-nav mr-auto">
-            <a href="index.html" class="nav-item nav-link active">Home</a>
+            <a href="{{route('frontend.index')}}" class="nav-item nav-link active">Home</a>
             <div class="nav-item dropdown">
               <a
                 href="#"
