@@ -14,4 +14,8 @@ class Category extends Model
     {
      return $this->hasMany(Post::class ,'category_id');
     }
+
+    public function scopeActiveCat($q){
+        $q->where('status',1);
+ }
 }

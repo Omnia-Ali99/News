@@ -21,7 +21,7 @@ class SearchController extends Controller
         $keyword = strip_tags($request->search );
 
     
-        $posts = Post::where('title','LIKE','%'. $keyword .'%')
+        $posts = Post::active()->where('title','LIKE','%'. $keyword .'%')
         ->orWhere('desc','LIKE','%'. $keyword .'%')->paginate(12);
               return  view('frontend.search',compact('posts'));
     }

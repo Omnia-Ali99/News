@@ -28,7 +28,7 @@ class ContactController extends Controller
      $contact =Contact::create($request->except('_token'));
 
      if(!$contact){
-        Session::flash('Contact us failed');
+        Session::flash('error','Contact us failed');
          return redirect()->back();
     }
         

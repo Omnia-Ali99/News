@@ -12,7 +12,7 @@ class PostController extends Controller
 {
     public function show($slug){
 
-        $mainPost = Post::with(['comments'=>function($q){
+        $mainPost = Post::active()->with(['comments'=>function($q){
             $q->latest()->limit(3);
         }])->whereSlug($slug)->first();
         $category =  $mainPost->category;
@@ -23,7 +23,7 @@ class PostController extends Controller
     }
     public function getAllPosts($slug){
 
-        $post = Post::whereSlug($slug)->first();
+        $post = Post::active()->whereSlug($slug)->first();
         $comments =$post->comments()->with('user')->get();
         return response()->json($comments);
 

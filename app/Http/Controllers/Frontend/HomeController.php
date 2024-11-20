@@ -11,12 +11,12 @@ class HomeController extends Controller
 {
     public function index(){
 
-        $posts = Post::with('images')->latest()->paginate(9);
-        $gretest_posts_views = Post::orderBy('num_of_views', 'desc')->limit(3)->get();
-        $Oldest_News = Post::oldest()->take(3)->get();
-        $gretest_posts_comments = Post::withCount('comments')->orderBy('comments_count','desc')->take(3)->get();
+        $posts = Post::active()->with('images')->latest()->paginate(9);
+        $gretest_posts_views = Post::active()->orderBy('num_of_views', 'desc')->limit(3)->get();
+        $Oldest_News = Post::active()->oldest()->take(3)->get();
+        $gretest_posts_comments = Post::active()->withCount('comments')->orderBy('comments_count','desc')->take(3)->get();
 
-        $categories = Category::all();
+        $categories = Category::activeCat()->get();
         $categories_with_posts = $categories->map(function($category){
             $category->posts = $category->posts()->limit(4)->get();
             return $category;
