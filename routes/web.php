@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsSubscriberController;
 use App\Http\Controllers\Frontend\PostController;
+use App\Http\Controllers\Frontend\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,7 @@ Route::group([
         Route::post('contact-us/store',[ContactController::class,'store'])->name('store');
     
     });
-  
+   Route::match(['get', 'post'],'search',SearchController::class)->name('search');
 
 });
 
