@@ -1,13 +1,16 @@
-@extends('layouts.app')
-
-@section('content')
+@extends('layouts.frontend.app')
+@section('breadcrumb')
+  @parent
+  <li class="breadcrumb-item active">login</a></li>
+@endsection
+@section('body')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card mb-5 mt-5">
                 <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
+                <div class="card-body ">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
