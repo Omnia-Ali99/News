@@ -43,6 +43,11 @@ Route::group([
    Route::match(['get', 'post'],'search',SearchController::class)->name('search');
 
 });
+
+ route::get('test',function(){
+ return view('frontend.dashboard.profile');
+ });
+
 Route::prefix('email')->name('verification.')->controller(VerificationController::class)->group(function(){
     Route::get('/verify', 'show')->name('notice');
     Route::get('/verify/{id}/{hash}','verify')->name('verify');

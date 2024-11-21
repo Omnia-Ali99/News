@@ -1,4 +1,7 @@
 @extends('layouts.frontend.app')
+@section('title')
+Search news
+@endsection
 @section('breadcrumb')
   @parent
   <li class="breadcrumb-item active">Search</a></li>
