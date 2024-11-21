@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\Frontend\CategoryController;
-use App\Http\Controllers\Frontend\ContactController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\NewsSubscriberController;
 use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\Frontend\SearchController;
+use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\NewsSubscriberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +20,11 @@ use App\Http\Controllers\Frontend\SearchController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::redirect('/','/home');
 Route::group([
 'as'=>'frontend.'
 ],function(){
-    Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::get('/home', [HomeController::class, 'index'])->name('index');
     Route::post('news-subscribe',[NewsSubscriberController::class,'store'])->name('news.subscribe');
     Route::get('category/{slug}',CategoryController::class)->name('category.posts');
    
@@ -42,7 +43,12 @@ Route::group([
    Route::match(['get', 'post'],'search',SearchController::class)->name('search');
 
 });
-
+Route::prefix('email')->name('verification.')->controller(VerificationController::class)->group(function(){
+    Route::get('/verify', 'show')->name('notice');
+    Route::get('/verify/{id}/{hash}','verify')->name('verify');
+    Route::post('/resend','resend')->name('resend');
+  
+});
+  
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -438,8 +438,6 @@ button.btn:hover {
   padding: 0;
 }
 
-.slick-slide .slick-prev,
-.slick-slide .slick-next,
 .top-news .slick-prev,
 .top-news .slick-next {
   width: 28px;
@@ -451,12 +449,10 @@ button.btn:hover {
   border-radius: 4px;
 }
 
-.slick-slide .slick-prev,
 .top-news .slick-prev {
   left: 30px;
 }
 
-.slick-slide .slick-next,
 .top-news .slick-next {
   right: 30px;
 }
@@ -469,8 +465,6 @@ button.btn:hover {
   background: #ff6f61;
 }
 
-.slick-slide .slick-prev::before,
-.slick-slide .slick-next::before,
 .top-news .slick-prev::before,
 .top-news .slick-next::before {
   font-family: "Font Awesome 5 Free";
@@ -479,12 +473,10 @@ button.btn:hover {
   color: #ffffff;
 }
 
-.slick-slide .slick-prev::before,
 .top-news .slick-prev::before {
   content: "\f104";
 }
 
-.slick-slide .slick-next::before,
 .top-news .slick-next::before {
   content: "\f105";
 }
@@ -554,7 +546,7 @@ button.btn:hover {
 
 .cat-news .slick-prev,
 .cat-news .slick-next {
-  top: 20px;
+  top: -62px;
   width: 28px;
   height: 28px;
   z-index: 1;
@@ -864,7 +856,7 @@ button.btn:hover {
 
 .single-news .sn-slider .slick-prev,
 .single-news .sn-slider .slick-next {
-  top: 20px;
+  top: -62px;
   width: 28px;
   height: 28px;
   z-index: 1;
@@ -1446,7 +1438,6 @@ button.btn:hover {
   flex-direction: row;
   min-height: 100vh;
   overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .profile-sidebar {
@@ -1486,9 +1477,9 @@ button.btn:hover {
   overflow-y: auto;
 }
 
-.content-section {
+/* .content-section {
   display: none;
-}
+} */
 
 .content-section.active {
   display: block;
@@ -1517,181 +1508,142 @@ h2 {
   font-weight: bold;
   color: #333;
 }
-.add-post-section {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+/* Modal Styles */
+.edit-modal {
+  display: none;
+  position: fixed;
+  z-index: 100000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
 }
 
-.post-form input[type="text"],
-.post-form textarea,
-.edit-post-image,
-.post-form select,
-.post-form input[type="file"] {
-  width: 100%;
-  margin: 10px 0;
+.modal-content {
+  max-height: 90vh;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 5px;
+}
+
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Display uploaded image */
+.post-img-preview {
+  object-fit: cover;
+  max-width: 40rem;
+  max-height: 20rem;
+  margin-top: 10px;
+}
+
+/* Post Input Styles */
+.post-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#postBox {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  outline: none;
+  resize: vertical;
+  min-height: 50px;
+  max-height: 200px;
+}
+
+#postImage {
+  margin-top: 10px;
+}
+
+#postCategory {
+  margin-top: 10px;
+}
+
+#enableComments {
+  margin-top: 10px;
 }
 
 .post-btn {
+  padding: 10px 20px;
   background-color: #ff6f61;
   color: white;
   border: none;
-  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .post-btn:hover {
-  background-color: #e55b51;
+  background-color: #e65a50;
 }
 
-.image-slider {
-  margin: 10px 0;
-}
-
-.slick-slider {
-  width: 100%;
-  overflow: hidden;
-}
-
-.slick-slide img {
-  max-width: 30rem;
-  width: 100%;
-  margin: 0 auto;
-  object-fit: cover;
-  max-height: 20rem;
-  border-radius: 5px;
-}
-.top-news .slick-prev,
-.top-news .slick-next {
-  width: 28px;
-  height: 28px;
-  z-index: 1;
-  transition: 0.5s;
-  color: #ffffff;
-  background: #000000;
-  border-radius: 4px;
-}
-
-.posts-section {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
+/* User Posts Styles */
 .user-posts {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
-.post-comments {
-  cursor: pointer;
-}
+
 .post-item {
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.post-title,
-.post-content,
-.post-category {
-  margin-bottom: 10px;
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.post-title[readonly],
-.post-content[readonly] {
-  background-color: #f9f9f9;
-}
-
-.post-meta {
   display: flex;
+  flex-direction: column;
   gap: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.post-img {
+  object-fit: cover;
+  margin: auto;
+  max-width: 40rem;
+  max-height: 20rem;
+  margin-top: 10px;
+}
+.post-content {
+  margin: 0;
+}
+
+.post-category {
+  font-style: italic;
   color: #666;
 }
 
 .post-actions {
   display: flex;
   gap: 10px;
-  margin-top: 10px;
 }
 
-.slick-slider {
-  margin: 10px 0;
-}
-
-.slick-slide img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-.comments-section {
-  list-style: none;
-  padding: 0;
-  margin-top: 10px;
-  border-top: 1px solid #ddd;
-}
-
-.comment-item {
-  display: flex;
-  gap: 10px;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.comment-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.comment-content {
-  flex: 1;
-}
-
-.comment-username {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.delete-img-btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: #ff6f61;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  font-size: 12px;
-}
-.edit-img {
-  position: relative !important;
-}
-.edit-img img {
-  object-fit: contain;
-  height: 20rem;
-}
 .edit-post-btn,
-.save-post-btn,
-.cancel-edit-btn,
 .delete-post-btn {
   border: none;
   padding: 5px 10px;
@@ -1699,210 +1651,23 @@ h2 {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-/* Notification Form Styles */
 
-/* Notification dropdown styles */
-.notification-icon {
-  position: relative;
+.edit-post-btn {
+  background-color: #ff6f61;
+  color: white;
 }
 
-.notification-dropdown {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 35px;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 300px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+.edit-post-btn:hover {
+  background-color: #e65a50;
 }
 
-.notification-dropdown .notification-dropdown-list {
-  list-style: none;
-  margin: 0;
-  padding: 10px 0;
-  color: #e55547;
+.delete-post-btn {
+  background-color: #d9534f;
+  color: white;
 }
 
-.notification-dropdown .notification-dropdown-list li {
-  display: flex;
-  cursor: pointer;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 5px;
-  border-bottom: 1px solid #f2f2f2;
-  color: #e55547;
-  font-size: 14px;
-}
-.notification-dropdown .notification-dropdown-list li:hover {
-  background-color: #ffc6c1;
-}
-
-.notification-dropdown .notification-dropdown-list li:last-child {
-  border-bottom: none;
-}
-
-.notification-dropdown .notification-dropdown-list li span {
-  color: #333;
-  font-size: 0.9rem;
-}
-
-.notification-dropdown .notification-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.visit-btn,
-.delete-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #ff6f61;
-  transition: color 0.3s ease;
-  font-size: 1.2rem;
-}
-
-.visit-btn:hover,
-.delete-btn:hover {
-  color: #e55547; /* Slightly darker shade for hover effect */
-}
-
-.notification-actions .mdi {
-  vertical-align: middle;
-}
-
-.content-section {
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 8px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-}
-
-#notifications h2 {
-  color: #333;
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-}
-
-.notification-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.notification-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  background-color: #ffeceb;
-  border-radius: 4px;
-  border: 1px solid #ff6f61;
-  transition: box-shadow 0.3s ease;
-}
-
-.notification-list li:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.notification-list span {
-  color: #333;
-  font-size: 1rem;
-}
-
-.notification-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.notification-actions .visit-btn,
-.notification-actions .delete-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #ff6f61;
-  transition: color 0.3s ease;
-  font-size: 1.2rem;
-}
-
-.notification-actions .visit-btn:hover,
-.notification-actions .delete-btn:hover {
-  color: #e55547; /* Slightly darker shade for hover effect */
-}
-
-.notification-actions .mdi {
-  vertical-align: middle;
-}
-
-/* Notifications Form Styles */
-.content-section {
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 8px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-}
-
-#notifications h2 {
-  color: #333;
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-}
-
-.notification-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.notification-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  background-color: #ffeceb;
-  border-radius: 4px;
-  border: 1px solid #ff6f61;
-  transition: box-shadow 0.3s ease;
-}
-
-.notification-list li:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.notification-list span {
-  color: #333;
-  font-size: 1rem;
-}
-
-.notification-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.notification-actions .visit-btn,
-.notification-actions .delete-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #ff6f61;
-  transition: color 0.3s ease;
-  font-size: 1.2rem;
-}
-
-.notification-actions .visit-btn:hover,
-.notification-actions .delete-btn:hover {
-  color: #e55547; /* Slightly darker shade for hover effect */
-}
-
-.notification-actions .mdi {
-  vertical-align: middle;
+.delete-post-btn:hover {
+  background-color: #c9302c;
 }
 
 /* Settings Form Styles */
@@ -1942,55 +1707,6 @@ h2 {
 }
 
 .save-settings-btn:hover {
-  background-color: #e65a50;
-}
-.change-password-form {
-  margin-top: 20px;
-  padding: 20px;
-}
-
-.change-password-form h3 {
-  margin-bottom: 15px;
-  font-size: 1.2rem;
-  color: #333;
-}
-
-.change-password-form .form-group {
-  margin-bottom: 15px;
-}
-
-.change-password-form label {
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-.change-password-form input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  outline: none;
-}
-
-.change-password-form input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  color: #333;
-}
-
-.change-password-form .change-password-btn {
-  width: 100%;
-  padding: 10px 20px;
-  background-color: #ff6f61;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.change-password-form .change-password-btn:hover {
   background-color: #e65a50;
 }
 
