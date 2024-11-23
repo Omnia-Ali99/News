@@ -24,11 +24,11 @@ Show {{$mainPost->title}}
                     <div class="carousel-item @if($loop->index==0)
                       active
                     @endif">
-                      <img src="{{$image->path}}" class="d-block w-100" alt="First Slide">
+                      <img src="{{asset($image->path)}}" class="d-block w-100" alt="First Slide">
                       <div class="carousel-caption d-none d-md-block">
                         <h5>{{$mainPost->title}}</h5>
                         <p>
-                          {{substr($mainPost->desc,0,80)}}
+                          {{-- {substr($mainPost->desc,0,80)}} --}}
                         </p>
                       </div>
                     </div>
@@ -46,20 +46,28 @@ Show {{$mainPost->title}}
                   </a>
                 </div>
                 <div class="sn-content">
-                  {{$mainPost->desc}}
+                  {!! $mainPost->desc !!}
                </div>
+               
                 <!-- Comment Section -->
                 <div class="comment-section">
                   <!-- Comment Input -->
-                    <form id="commentForm">
-                      @csrf
-                      <div class="comment-input">
-                      <input id="commentInput" name="comment" type="text" placeholder="Add a comment..." id="commentBox" />
-                      <input type="hidden" name="user_id" value="1">
-                      <input type="hidden" name="post_id" value="{{$mainPost->id}}">
-                      <button type="submit" id="addCommentBtn">Comment</button>
-                    </div>
-                    </form>
+                  @if ($mainPost->comment_able == true)
+                  <form id="commentForm">
+                    @csrf
+                    <div class="comment-input">
+                    <input id="commentInput" name="comment" type="text" placeholder="Add a comment..." id="commentBox" />
+                    <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                    <input type="hidden" name="post_id" value="{{$mainPost->id}}">
+                    <button type="submit" id="addCommentBtn">Comment</button>
+                  </div>
+                  </form>
+                  @else
+                  <div class="alert alert-primary" role="alert">
+                   unable to commet
+                  </div>                  
+                  @endif
+                    
                    
                     <div id="errorMsg" class="alert alert-danger" style="display: none" role="alert">
                     </div>
@@ -67,7 +75,7 @@ Show {{$mainPost->title}}
                   <div class="comments">
                     @foreach ($mainPost->comments as $comment )
                     <div class="comment">
-                      <img src="{{$comment->user->image}}" alt="{{$comment->user->name}}" class="comment-img" />
+                      <img src="{{asset($comment->user->image)}}" alt="{{$comment->user->name}}" class="comment-img" />
                       <div class="comment-content">
                         <span class="username">{{$comment->user->name}}</span>
                         <p class="comment-text">{{$comment->comment}}</p>
@@ -78,7 +86,9 @@ Show {{$mainPost->title}}
                   </div>
   
                   <!-- Show More Button -->
+                  @if ($mainPost->comments->count()>2)
                   <button id="showMoreBtn" class="show-more-btn">Show more</button>
+                  @endif
                 </div>
   
                 <!-- Related News -->
@@ -88,7 +98,7 @@ Show {{$mainPost->title}}
                    @foreach ($posts_belongs_to_category  as $post)
                    <div class="col-md-4">
                     <div class="sn-img">
-                      <img src="{{$post->images->first()->path}}" class="img-fluid" alt="{{$post->title}}" />
+                      <img src="{{asset($post->images->first()->path)}}" class="img-fluid" alt="{{$post->title}}" />
                       <div class="sn-title">
                         <a href="{{route('frontend.post.show',$post->slug)}}" title="{{$post->title}}" >{{$post->title}}</a>
                       </div>
@@ -107,7 +117,7 @@ Show {{$mainPost->title}}
                   @foreach ($posts_belongs_to_category as $post)
                   <div class="nl-item">
                     <div class="nl-img">
-                      <img src="{{$post->images->first()->path}}" />
+                      <img src="{{asset($post->images->first()->path)}}" />
                     </div>
                     <div class="nl-title">
                       <a href="{{route('frontend.post.show',$post->slug)}}">{{$post->title}}</a>
@@ -140,7 +150,7 @@ Show {{$mainPost->title}}
                       @foreach ($gretest_posts_comments as $post )
                       <div class="tn-news">
                         <div class="tn-img">
-                          <img src="{{$post->images->first()->path}}" alt="{{$post->title}}"/>
+                          <img src="{{asset($post->images->first()->path)}}" alt="{{$post->title}}"/>
                         </div>
                         <div class="tn-title">
                           <a href="{{route('frontend.post.show',$post->slug)}}"
@@ -157,7 +167,7 @@ Show {{$mainPost->title}}
                         @foreach ($latest_posts as $post)
                         <div class="tn-news">
                           <div class="tn-img">
-                            <img src="{{$post->images->first()->path}}" alt="{{$post->title}}" />
+                            <img src="{{asset($post->images->first()->path)}}" alt="{{$post->title}}" />
                           </div>
                           <div class="tn-title">
                             <a href="{{route('frontend.post.show',$post->slug)}}" title="{{$post->title}}"
@@ -178,7 +188,7 @@ Show {{$mainPost->title}}
                   <div class="category">
                     <ul>
                       @foreach ($categories as $Category)
-                      <li><a href="">{{$Category->name}}</a><span>({{$Category->posts->count()}})</span></li>
+                      <li><a href="{{route('frontend.category.posts',$Category->slug)}}">{{$Category->name}}</a><span>({{$Category->posts->count()}})</span></li>
 
                       @endforeach
                     </ul>
@@ -214,7 +224,7 @@ Show {{$mainPost->title}}
           $('.comments').empty();
           $.each(data,function(key,comment){
             $('.comments').append(`<div class="comment">
-                      <img src="${comment.user.image}" alt="{{$comment->user->name}}" class="comment-img" />
+                      <img src="${comment.user.image}" alt="User Image" class="comment-img" />
                       <div class="comment-content">
                         <span class="username">${comment.user.name}</span>
                         <p class="comment-text">${comment.comment}</p>

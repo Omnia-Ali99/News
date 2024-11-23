@@ -8,7 +8,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Post extends Model
 {
     use HasFactory ,Sluggable ;
-    protected $fillable=['id','title','slug','desc','comment_able','status','user_id','created_at','updated_at'];
+    protected $fillable=['id','title','slug','desc','comment_able','status','user_id','category_id','created_at','updated_at'];
 
     public function category(){
       return  $this->belongsTo(Category::class ,'category_id');

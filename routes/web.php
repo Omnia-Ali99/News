@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\Dashboard\ProfileController;
 use App\Http\Controllers\Frontend\NewsSubscriberController;
 
 /*
@@ -21,6 +22,7 @@ use App\Http\Controllers\Frontend\NewsSubscriberController;
 |
 */
 Route::redirect('/','/home');
+
 Route::group([
 'as'=>'frontend.'
 ],function(){
@@ -42,11 +44,20 @@ Route::group([
     });
    Route::match(['get', 'post'],'search',SearchController::class)->name('search');
 
+   Route::prefix('account/')->name('dashboard.')->middleware(['auth'])->group(function(){
+    Route::controller(ProfileController::class)->group(function(){
+        Route::get('profile','index')->name('profile');
+        Route::post('post/store','storePost')->name('post.store');
+        Route::get('post/edit/{slug}','editPost')->name('post.edit');
+        Route::delete('post/delete','deletePost')->name('post.delete');
+
+    });
+    
+   });
+
 });
 
- route::get('test',function(){
- return view('frontend.dashboard.profile');
- });
+
 
 Route::prefix('email')->name('verification.')->controller(VerificationController::class)->group(function(){
     Route::get('/verify', 'show')->name('notice');
