@@ -46,7 +46,7 @@ Show {{$mainPost->title}}
                   </a>
                 </div>
                 <div class="sn-content">
-                  {!! $mainPost->desc !!}
+                  {!! chunk_split( $mainPost->desc ,35) !!}
                </div>
                
                 <!-- Comment Section -->

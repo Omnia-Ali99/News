@@ -95,7 +95,7 @@ profile
                    @forelse ($posts as $post)
                    <div class="post-item mb-4 p-3 border rounded">
                     <div class="post-header d-flex align-items-center mb-2">
-                        <img src="{{asset('default.jpg')}}" alt="User Image" class="rounded-circle" style="width: 50px; height: 50px;" />
+                        <img src="{{asset(auth()->user()->image)}}" alt="User Image" class="rounded-circle" style="width: 50px; height: 50px;" />
                         <div class="ms-3">
                             <h5 class="mb-0">{{auth()->user()->name}}</h5>
                         </div>
@@ -152,8 +152,12 @@ profile
                                 <i class="fas fa-thumbs-up"></i> Delete
                             </a>
 
-                            <button class="btn btn-sm btn-outline-secondary">
+                            <button id="commentbtn_{{$post->id}}" class="btn btn-sm btn-outline-secondary getCommets" post-id={{$post->id}}>
                                 <i class="fas fa-comment"></i> Comments
+                            </button>
+
+                            <button id="hideCommentId_{{$post->id}}" class="btn btn-sm btn-outline-secondary hideComment" style="display: none" post-id={{$post->id}} >
+                                <i class="fas fa-comment"></i>Hide Comments
                             </button>
 
                             <form id="deleteForm_{{$post->id}}" action="{{ route('frontend.dashboard.post.delete') }}" method="POST">
@@ -165,14 +169,8 @@ profile
                     </div>
 
                       <!-- Display Comments -->
-                      <div class="comments">
-                            <div class="comment">
-                                <img src="{{asset('default.jpg')}}" alt="User Image" class="comment-img" />
-                                <div class="comment-content">
-                                    <span class="username"></span>
-                                    <p class="comment-text">first comment</p>
-                                </div>
-                            </div>
+                      <div id="displayComments_{{$post->id}}" class="comments" style="display: none">
+                           
                         <!-- Add more comments here for demonstration -->
                        </div>
                 </div>
@@ -205,5 +203,55 @@ profile
                 height: 300,
             });
       } ); 
+
+      //get post comments
+
+      $(document).on('click','.getCommets',function(e){
+        e.preventDefault();
+
+        var post_id =$(this).attr('post-id');
+        
+
+        $.ajax({
+        url:'{{route('frontend.dashboard.post.getComments',":post_id")}}'.replace(':post_id',post_id),
+        type:'GET',
+        success:function(respons){
+            
+            $('#displayComments_'+post_id).empty();
+
+            $.each(respons.data,function(indexInArray,comment){
+                $('#displayComments_'+post_id).append(` <div  class="comment" >
+                                <img src="${comment.user.image}"  alt="User Image" class="comment-img" />
+                                <div class="comment-content">
+                                    <span class="username">${comment.user.name}</span>
+                                    <p class="comment-text">${comment.comment}</p>
+                                </div>
+                            </div>
+                `).show();
+            });
+
+            $('#commentbtn_'+post_id).hide();
+            $('#hideCommentId_'+post_id).show();
+        }
+    
+      });
+      });
+
+      //hide post comments
+      $(document).on('click','.hideComment',function(e){
+        e.preventDefault();
+        var post_id =$(this).attr('post-id');
+
+        $('#displayComments_'+post_id).hide();
+
+        $('#hideCommentId_'+post_id).hide();
+
+        $('#commentbtn_'+post_id).show();
+
+
+
+
+
+      });
    </script> 
 @endpush

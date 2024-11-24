@@ -17,6 +17,8 @@ class PostController extends Controller
         }])->whereSlug($slug)->first();
         $category =  $mainPost->category;
         $posts_belongs_to_category = $category->posts()->active()->select('id','title','slug')->limit(5)->get();
+
+        $mainPost->increment('num_of_views');
         return view('frontend.show' ,compact('mainPost','posts_belongs_to_category'));
 
 

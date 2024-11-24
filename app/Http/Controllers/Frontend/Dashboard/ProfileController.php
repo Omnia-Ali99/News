@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Dashboard;
 
 use App\Models\Post;
+use App\Models\Comment;
 use App\Utils\ImageManger;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -67,5 +68,19 @@ class ProfileController extends Controller
   
    $post->delete();
    return redirect()->back()->with('success','Post Deleted Successfully');  
+  }
+  public function getComments($id)
+  {
+      $comments = Comment::with(['user'])->where('post_id', $id)->get();
+      if (!$comments) {
+          return response()->json([
+              'data' => null,
+              'msg' => 'No Comments',
+          ]);
+      }
+      return response()->json([
+          'data' => $comments,
+          'msg' => 'Contain Comments',
+      ]);
   }
 }

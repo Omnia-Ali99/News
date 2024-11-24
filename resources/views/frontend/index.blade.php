@@ -16,7 +16,7 @@
               @foreach ( $latest_three_posts as $post)
               <div class="col-md-6">
                 <div class="tn-img">
-                  <img src="{{asset($post->images->first()->path)}}" />
+                  <img style="height: 383px;width:540px" src="{{asset($post->images->first()->path)}}" />
                   <div class="tn-title">
                     <a href="{{route('frontend.post.show', $post->slug)}}">{{$post->title}}</a>
                   </div>
@@ -33,7 +33,7 @@
                 @foreach ($four_posts as $post)
                 <div class="col-md-6">
                   <div class="tn-img">
-                    <img src="{{asset($post->images->first()->path)}}" />
+                    <img style="height: 195px;width:280px" src="{{asset($post->images->first()->path)}}" />
                     <div class="tn-title">
                       <a href="{{route('frontend.post.show', $post->slug)}}">{{$post->title}}</a>
                     </div>
@@ -178,7 +178,7 @@
                @foreach ($posts as $post )
                <div class="col-md-4">
                 <div class="mn-img">
-                  <img src="{{asset($post->images->first()->path)}}" />
+                  <img style="height: 200px; width:260px"src="{{asset($post->images->first()->path)}}" />
                   <div class="mn-title">
                     <a href="{{route('frontend.post.show', $post->slug)}}">{{$post->title}}</a>
                   </div>
