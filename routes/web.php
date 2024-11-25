@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\Dashboard\ProfileController;
+use App\Http\Controllers\Frontend\Dashboard\SettingController;
 use App\Http\Controllers\Frontend\NewsSubscriberController;
 
 /*
@@ -51,10 +52,12 @@ Route::group([
         Route::get('post/edit/{slug}','editPost')->name('post.edit');
         Route::delete('post/delete','deletePost')->name('post.delete');
         Route::get('post/get-comments/{id}','getComments')->name('post.getComments');
-
-
     });
-    
+    Route::prefix('setting')->controller(SettingController::class)->group(function(){
+        Route::get('/','index')->name('setting');
+        Route::post('/update','update')->name('setting.update');
+        Route::post('/change-password','ChangePassword')->name('setting.ChangePassword');
+    });
    });
 
 });

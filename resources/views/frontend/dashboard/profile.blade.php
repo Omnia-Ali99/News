@@ -23,10 +23,10 @@ profile
             <a href="{{route('frontend.dashboard.profile')}}" class="list-group-item list-group-item-action active menu-item" data-section="profile">
                 <i class="fas fa-user"></i> Profile
             </a>
-            <a href="./notifications.html" class="list-group-item list-group-item-action menu-item" data-section="notifications">
+            <a href="" class="list-group-item list-group-item-action menu-item" data-section="notifications">
                 <i class="fas fa-bell"></i> Notifications
             </a>
-            <a href="./setting.html" class="list-group-item list-group-item-action menu-item" data-section="settings">
+            <a href="{{route('frontend.dashboard.setting')}}" class="list-group-item list-group-item-action menu-item" data-section="settings">
                 <i class="fas fa-cog"></i> Settings
             </a>
         </div>
@@ -216,12 +216,13 @@ profile
         url:'{{route('frontend.dashboard.post.getComments',":post_id")}}'.replace(':post_id',post_id),
         type:'GET',
         success:function(respons){
+            const baseUrl = "{{ url('/') }}/";
             
             $('#displayComments_'+post_id).empty();
 
             $.each(respons.data,function(indexInArray,comment){
                 $('#displayComments_'+post_id).append(` <div  class="comment" >
-                                <img src="${comment.user.image}"  alt="User Image" class="comment-img" />
+                                <img src="${baseUrl+comment.user.image}"  alt="User Image" class="comment-img" />
                                 <div class="comment-content">
                                     <span class="username">${comment.user.name}</span>
                                     <p class="comment-text">${comment.comment}</p>
