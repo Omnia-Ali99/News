@@ -26,7 +26,7 @@ class PostRequest extends FormRequest
             'desc'=>['required','min:10'],
             'category_id'=>['exists:categories,id'],
             'comment_able'=>['in:on,off'],
-            'images'=>['required','array'],
+            'images'=>['nullable','array'],
             'images.*' =>['image','mimes:jpeg,png,jpg,gif']
             
 

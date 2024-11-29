@@ -47,6 +47,7 @@ public static function deleteImages($post){
         foreach($post->images as $image){
 
           self::deleteImageFormLocal($image->path);
+          $image->delete();
          
         }
       }
@@ -65,7 +66,7 @@ public static function deleteImages($post){
 
 }
 
-private static function deleteImageFormLocal($image_path){
+public static function deleteImageFormLocal($image_path){
 
   if(File::exists(public_path($image_path))){
     File::delete(public_path($image_path));

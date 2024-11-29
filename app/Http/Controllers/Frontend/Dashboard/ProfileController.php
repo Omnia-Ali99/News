@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
@@ -23,13 +24,12 @@ class ProfileController extends Controller
 
   }
   public function storePost(PostRequest $request ){
+    $request->validated();
 
     try{
         DB::beginTransaction();
 
-        $request->validated();
-        $request->comment_able == 'on' ? $request->merge(['comment_able'=>1]) : $request->merge(['comment_able'=>0]);
-
+        $this->commentAble($request);
         $post = auth()->user()->posts()->create($request->except(['_token', 'images']));
    
         ImageManger::uploadImages($request,$post);
@@ -82,5 +82,69 @@ class ProfileController extends Controller
           'data' => $comments,
           'msg' => 'Contain Comments',
       ]);
+  }
+  public function showEditForm($slug){
+
+    $post = Post::with('images')->whereSlug($slug)->first();
+
+    if(!$post){
+      abort(404);
+    }
+    return view('frontend.dashboard.edit-post',compact('post'));
+
+
+  }
+  public function update(PostRequest $request){
+    
+    $request->validated();
+    try{
+      DB::beginTransaction();
+
+      $post =Post::findOrFail($request->post_id);
+      $this->commentAble($request);
+      $post->update($request->except(['_token', 'images','post_id']));
+  
+      if($request->hasFile('images')){
+  
+        ImageManger::deleteImages($post);
+        ImageManger::uploadImages($request,$post);
+  
+      }
+      DB::commit();
+
+  }catch(\Exception $e){
+      DB::rollBack();
+      return redirect()->back()->withErrors(['erorrs',$e->getMessage()]);  
+
+  }
+ 
+    Session::flash('success','Post Updated successfully');
+    return redirect()->route('frontend.dashboard.profile'); 
+
+   
+
+  }
+  private function commentAble($request){
+    return $request->comment_able == 'on' ? $request->merge(['comment_able'=>1]) :
+     $request->merge(['comment_able'=>0]);
+
+
+  }
+  public function deletePostImage(Request $request , $image_id){
+    $image = Image::find($request->key);
+    if(!$image){
+      return response()->json([
+        'status'=>'201',
+        'msg'=>'Image Not Found'
+      ]);
+    }
+    ImageManger::deleteImageFormLocal($image->path);
+
+    $image->delete();
+    return response()->json([
+      'status'=>'201',
+      'msg'=>'Image deleted successfully'
+    ]);
+
   }
 }

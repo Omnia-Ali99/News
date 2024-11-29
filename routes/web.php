@@ -49,14 +49,18 @@ Route::group([
     Route::controller(ProfileController::class)->group(function(){
         Route::get('profile','index')->name('profile');
         Route::post('post/store','storePost')->name('post.store');
-        Route::get('post/edit/{slug}','editPost')->name('post.edit');
         Route::delete('post/delete','deletePost')->name('post.delete');
         Route::get('post/get-comments/{id}','getComments')->name('post.getComments');
+        Route::get('post/{slug}/edit',action: 'showEditForm')->name('post.edit');
+        Route::put('post/update','update')->name('post.update');
+        Route::post('post/image/delete/{image_id}' , 'deletePostImage')->name('post.image.delete');
+
     });
     Route::prefix('setting')->controller(SettingController::class)->group(function(){
         Route::get('/','index')->name('setting');
         Route::post('/update','update')->name('setting.update');
         Route::post('/change-password','ChangePassword')->name('setting.ChangePassword');
+        
     });
    });
 
