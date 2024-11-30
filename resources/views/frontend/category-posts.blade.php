@@ -3,8 +3,8 @@
 {{$category->name}}
 @endsection
 @section('breadcrumb')
-  @parent
-  <li class="breadcrumb-item active">{{$category->name}}</a></li>
+<li class="breadcrumb-item"><a href="{{route('frontend.index')}}">Home</a></li>
+<li class="breadcrumb-item active">{{$category->name}}</a></li>
 @endsection
 @section('body')
       <br><br><br>
@@ -30,7 +30,7 @@
               </div>
             </div>
   
-            <div class="col-lg-3">
+            <div class="col-lg-12">
               <div class="mn-list">
                 <h2>other categories</h2>
                 <ul>

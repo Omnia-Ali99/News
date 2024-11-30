@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Notifications\NewCommentNotify;
 use Flasher\Laravel\Http\Response;
 use Illuminate\Http\Request;
 
@@ -44,6 +45,11 @@ class PostController extends Controller
             'post_id'=>$request->post_id,
             'ip_address'=>$request->ip(),
         ]);
+
+        $post = Post::findOrFail($request->post_id);
+        if(auth()->user()->id != $request->user_id){
+            $post->user->notify(new NewCommentNotify($comment,$post));
+        }
      
        $comment->load('user');
 

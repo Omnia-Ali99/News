@@ -45,51 +45,57 @@ Show {{$mainPost->title}}
                     <span class="sr-only">Next</span>
                   </a>
                 </div>
+                <div class="alert alert-info">
+                  Publisher : {{$mainPost->user->name}}
+                </div>
                 <div class="sn-content">
-                  {!! chunk_split( $mainPost->desc ,35) !!}
+                  {!! chunk_split(strip_tags($mainPost->desc), 30) !!}
+
                </div>
                
-                <!-- Comment Section -->
-                <div class="comment-section">
-                  <!-- Comment Input -->
-                  @if ($mainPost->comment_able == true)
-                  <form id="commentForm">
-                    @csrf
-                    <div class="comment-input">
-                    <input id="commentInput" name="comment" type="text" placeholder="Add a comment..." id="commentBox" />
-                    <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
-                    <input type="hidden" name="post_id" value="{{$mainPost->id}}">
-                    <button type="submit" id="addCommentBtn">Comment</button>
-                  </div>
-                  </form>
-                  @else
-                  <div class="alert alert-primary" role="alert">
-                   unable to commet
-                  </div>                  
-                  @endif
-                    
-                   
-                    <div id="errorMsg" class="alert alert-danger" style="display: none" role="alert">
-                    </div>
-                  <!-- Display Comments -->
-                  <div class="comments">
-                    @foreach ($mainPost->comments as $comment )
-                    <div class="comment">
-                      <img src="{{asset($comment->user->image)}}" alt="{{$comment->user->name}}" class="comment-img" />
-                      <div class="comment-content">
-                        <span class="username">{{$comment->user->name}}</span>
-                        <p class="comment-text">{{$comment->comment}}</p>
+            @auth
+                    <!-- Comment Section -->
+                    <div class="comment-section">
+                      <!-- Comment Input -->
+                      @if ($mainPost->comment_able == true)
+                      <form id="commentForm">
+                        @csrf
+                        <div class="comment-input">
+                        <input id="commentInput" name="comment" type="text" placeholder="Add a comment..." id="commentBox" />
+                        <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                        <input type="hidden" name="post_id" value="{{$mainPost->id}}">
+                        <button type="submit" id="addCommentBtn">Comment</button>
                       </div>
+                      </form>
+                      @else
+                      <div class="alert alert-primary" role="alert">
+                       unable to commet
+                      </div>                  
+                      @endif
+                        
+                       
+                        <div id="errorMsg" class="alert alert-danger" style="display: none" role="alert">
+                        </div>
+                      <!-- Display Comments -->
+                      <div class="comments">
+                        @foreach ($mainPost->comments as $comment )
+                        <div class="comment">
+                          <img src="{{asset($comment->user->image)}}" alt="{{$comment->user->name}}" class="comment-img" />
+                          <div class="comment-content">
+                            <span class="username">{{$comment->user->name}}</span>
+                            <p class="comment-text">{{$comment->comment}}</p>
+                          </div>
+                        </div>
+                        @endforeach
+                        <!-- Add more comments here for demonstration -->
+                      </div>
+      
+                      <!-- Show More Button -->
+                      @if ($mainPost->comments->count()>2)
+                      <button id="showMoreBtn" class="show-more-btn">Show more</button>
+                      @endif
                     </div>
-                    @endforeach
-                    <!-- Add more comments here for demonstration -->
-                  </div>
-  
-                  <!-- Show More Button -->
-                  @if ($mainPost->comments->count()>2)
-                  <button id="showMoreBtn" class="show-more-btn">Show more</button>
-                  @endif
-                </div>
+            @endauth
   
                 <!-- Related News -->
                 <div class="sn-related">

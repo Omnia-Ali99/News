@@ -46,12 +46,19 @@
 
 
    @include('layouts.frontend.header')
+
+@auth
+<script>
+  id = "{{auth()->user()->id}}";
+ </script>  
+@endauth
+   <script src="{{asset('build/assets/app-37257930.js')}}"></script>
              <!-- Breadcrumb Start -->
  <div class="breadcrumb-wrap">
   <div class="container">
     <ul class="breadcrumb">
       @section('breadcrumb')
-      <li class="breadcrumb-item"><a href="{{route('frontend.index')}}">Home</a></li>
+      {{-- --}}
       @show
     </ul>
   </div>

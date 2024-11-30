@@ -1,7 +1,7 @@
   @extends('layouts.frontend.app')
   @section('title','Home')
   @section('breadcrumb')
-    @parent
+  <li class="breadcrumb-item"><a href="{{route('frontend.index')}}">Home</a></li>
   @endsection
   @section('body')
   @php

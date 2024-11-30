@@ -3,8 +3,8 @@
 contact us
 @endsection
 @section('breadcrumb')
-  @parent
-  <li class="breadcrumb-item active">contact us</a></li>
+<li class="breadcrumb-item"><a href="{{route('frontend.index')}}">Home</a></li>
+<li class="breadcrumb-item active">contact us</a></li>
 @endsection
 @section('body')
 

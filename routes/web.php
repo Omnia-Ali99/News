@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\Dashboard\NotificationController;
 use App\Http\Controllers\Frontend\Dashboard\ProfileController;
 use App\Http\Controllers\Frontend\Dashboard\SettingController;
 use App\Http\Controllers\Frontend\NewsSubscriberController;
@@ -45,7 +46,8 @@ Route::group([
     });
    Route::match(['get', 'post'],'search',SearchController::class)->name('search');
 
-   Route::prefix('account/')->name('dashboard.')->middleware(['auth'])->group(function(){
+   Route::prefix('account/')->name('dashboard.')->middleware(['auth:web'])->group(function(){
+
     Route::controller(ProfileController::class)->group(function(){
         Route::get('profile','index')->name('profile');
         Route::post('post/store','storePost')->name('post.store');
@@ -56,12 +58,22 @@ Route::group([
         Route::post('post/image/delete/{image_id}' , 'deletePostImage')->name('post.image.delete');
 
     });
+
     Route::prefix('setting')->controller(SettingController::class)->group(function(){
         Route::get('/','index')->name('setting');
         Route::post('/update','update')->name('setting.update');
         Route::post('/change-password','ChangePassword')->name('setting.ChangePassword');
         
     });
+
+    Route::prefix('notification')->controller(NotificationController::class)->group(function(){
+        Route::get('/','index')->name('notification.index');
+        Route::post('/delete','delete')->name('notification.delete');
+        Route::get('/delete-all','deleteAll')->name('notification.deleteAll');
+
+    });
+
+
    });
 
 });

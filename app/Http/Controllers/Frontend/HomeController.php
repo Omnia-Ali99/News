@@ -16,9 +16,9 @@ class HomeController extends Controller
         $Oldest_News = Post::active()->oldest()->take(3)->get();
         $gretest_posts_comments = Post::active()->withCount('comments')->orderBy('comments_count','desc')->take(3)->get();
 
-        $categories = Category::activeCat()->get();
+        $categories = Category::activeCat()->has('posts','>=','2')->get();
         $categories_with_posts = $categories->map(function($category){
-            $category->posts = $category->posts()->limit(4)->get();
+            $category->posts = $category->posts()->active()->limit(4)->get();
             return $category;
         });
         return view('frontend.index' ,compact('posts' ,'gretest_posts_views','Oldest_News','gretest_posts_comments' ,'categories_with_posts'));
