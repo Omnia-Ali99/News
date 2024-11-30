@@ -98,7 +98,7 @@
                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown"
                              style="width: 300px;">
                              <h6 class="dropdown-header">Notifications</h6>
-                             @forelse (auth()->user()->unreadNotifications()->take()->get()  as $notify)
+                             @forelse (auth()->user()->unreadNotifications()->take(5)->get()  as $notify)
                                  <div id="push-notification">
                                      <div id="push-notification">
                                          <div class="dropdown-item d-flex justify-content-between align-items-center">
