@@ -39,9 +39,12 @@ profile
                     <!-- Post Title -->
                     <input name="title" type="text" id="postTitle" class="form-control mb-2" placeholder="Post Title" />
   
+                    <textarea name="small_desc"  class="form-control mb-2" rows="3" placeholder="Enter Small Description"></textarea>
+
                     <!-- Post Content -->
                     <textarea name="desc" id="postContent" class="form-control mb-2" rows="3" placeholder="What's on your mind?"></textarea>
   
+
                     <!-- Image Upload -->
                     <input name="images[]" type="file" id="postImage" class="form-control mb-2" accept="image/*" multiple />
                     <div class="tn-slider mb-2">

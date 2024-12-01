@@ -8,10 +8,8 @@
       content="Bootstrap News Template - Free HTML Templates"
       name="keywords"
     />
-    <meta
-      content="Bootstrap News Template - Free HTML Templates"
-      name="description"
-    />
+  
+    <meta content="@yield('meta_desc')" name="description" />
 
     <!-- Favicon -->
     <link href="{{asset('assets/frontend/img/favicon.ico')}}" rel="icon" />

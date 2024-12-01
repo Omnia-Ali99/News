@@ -34,8 +34,10 @@
                             <input name="title" type="text" class="form-control mb-2 post-title"
                                 value="{{ $post->title }}" />
 
+                            <textarea name="small_desc"  class="form-control mb-2" rows="3" placeholder="Enter Small Description">{{$post->small_desc??'' }}</textarea>
+
                             <!-- Editable Content -->
-                            <textarea id="post-desc" name="desc" class="form-control mb-2 post-content">
+                            <textarea id="post-desc" name="desc" class="form-control mb-2 post-content" placeholder="What's on your mind?">
                             {!! strip_tags($post->desc) !!}
                             </textarea>
 

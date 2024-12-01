@@ -3,7 +3,7 @@
 Search news
 @endsection
 @section('breadcrumb')
-  @parent
+<li class="breadcrumb-item"><a href="{{route('frontend.index')}}">Home</a></li>
   <li class="breadcrumb-item active">Search</a></li>
 @endsection
 @section('body')

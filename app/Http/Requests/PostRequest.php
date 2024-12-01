@@ -24,6 +24,7 @@ class PostRequest extends FormRequest
         return [
             'title'=>['required','string','min:3','max:50'],
             'desc'=>['required','min:10'],
+            'small_desc'=>['required' , 'min:3' , 'max:170'],
             'category_id'=>['exists:categories,id'],
             'comment_able'=>['in:on,off'],
             'images'=>['nullable','array'],

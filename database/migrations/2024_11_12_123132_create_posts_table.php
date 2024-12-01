@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->longText('desc');
+            $table->text('small_desc');
             $table->boolean('comment_able')->default(1);
             $table->boolean('status')->default(1);
             $table->bigInteger('num_of_views')->default(0);

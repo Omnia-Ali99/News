@@ -22,6 +22,7 @@ class PostFactory extends Factory
         return [
          'title'=>fake()->sentence(3),
          'desc'=>fake()->paragraph(5),
+         'small_desc'=>fake()->paragraph(5),
          'status'=>rand(0,1),
          'comment_able'=>rand(0,1),
          'num_of_views'=>rand(0,100),

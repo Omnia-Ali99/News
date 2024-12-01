@@ -3,8 +3,11 @@
 Show {{$mainPost->title}}
 @endsection
 @section('breadcrumb')
-  @parent
-  <li class="breadcrumb-item active">{{$mainPost->title}}</a></li>
+<li class="breadcrumb-item"><a href="{{route('frontend.index')}}">Home</a></li>
+<li class="breadcrumb-item active">{{$mainPost->title}}</a></li>
+@endsection
+@section('meta_desc')
+    {{$mainPost->small_desc}}
 @endsection
 @section('body')
 <!-- Single News Start-->
