@@ -90,6 +90,21 @@
             </div>
         </div>
     </li>
+    <!-- Nav Item - users -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
+            aria-expanded="true" aria-controls="collapseUsers">
+            <i class="fas fa-fw fa-users"></i>
+            <span>User Management</span>
+        </a>
+        <div id="collapseUsers" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{route('admin.users.index')}}">Users</a>
+                <a class="collapse-item" href="register.html">Add User</a>
+                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+            </div>
+        </div>
+    </li>
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
