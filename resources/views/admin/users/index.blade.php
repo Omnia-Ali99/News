@@ -50,11 +50,15 @@
                         <td>{{$user->country}}</td>
                         <td>{{$user->created_at}}</td>
                         <td>
-                            <a href=""><i class="fa fa-trash"></i></a>
-                            <a href=""><i class="fa fa-stop"></i></a>
+                            <a href="javascript:void(0)" onclick="if(confirm('Do you want to delete the user?')){document.getElementById('delete_user_{{$user->id}}').submit();} return false;"><i class="fa fa-trash"></i></a>
+                            <a href="{{route('admin.users.changeStatus', $user->id)}}"><i class="fa @if($user->status ==1)fa-stop @else fa-play @endif"></i></a>
                             <a href=""><i class="fa fa-eye"></i></a>
                         </td>
                     </tr>
+                    <form id="delete_user_{{$user->id}}" action="{{route('admin.users.destroy',$user->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                    </form>
                           
                       @empty
                           <tr>

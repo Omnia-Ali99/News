@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Utils\ImageManger;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 use function PHPUnit\Framework\isNull;
 
@@ -78,6 +80,31 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        ImageManger::deleteImageFormLocal($user->image);
+        $user->delete();
+        Session::flash('success','user deleted successfully');
+        return redirect()->back();
+    } 
+
+    public function changeStatus($id){
+
+        $user = User::findOrFail($id);
+
+        if($user->status == 1){
+            $user->update([
+                'status' =>0
+            ]);  
+            Session::flash('success','User Blocked Successfully');
+
+        }else{
+            $user->update([
+                'status' =>1
+            ]);
+            Session::flash('success','User Active Successfully');
+  
+        }
+        return redirect()->back();
+
     }
 }

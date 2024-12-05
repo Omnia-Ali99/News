@@ -49,7 +49,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'auth:admin'],funct
     
     Route::resource('users',UserController::class);
 
-
+    Route::get('users/status/{id}',[UserController::class,'changeStatus'])->name('users.changeStatus');
     Route::get('home',function(){
         return view('admin.index');
     })->name('home');
