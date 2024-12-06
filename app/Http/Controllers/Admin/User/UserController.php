@@ -75,7 +75,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.users.show',compact(['user'])) ;
     }
 
     /**
@@ -83,7 +84,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+       
     }
 
     /**
@@ -103,7 +104,7 @@ class UserController extends Controller
         ImageManger::deleteImageFormLocal($user->image);
         $user->delete();
         Session::flash('success', 'user deleted successfully');
-        return redirect()->back();
+        return redirect()->route('admin.users.index');
     }
 
     public function changeStatus($id)
