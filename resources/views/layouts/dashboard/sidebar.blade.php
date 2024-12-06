@@ -100,7 +100,7 @@
         <div id="collapseUsers" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{route('admin.users.index')}}">Users</a>
-                <a class="collapse-item" href="register.html">Add User</a>
+                <a class="collapse-item" href="{{route('admin.users.create')}}">Add User</a>
                 <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
             </div>
         </div>
