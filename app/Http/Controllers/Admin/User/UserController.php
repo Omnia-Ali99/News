@@ -27,7 +27,7 @@ class UserController extends Controller
 
         $users = User::when(request()->Keyword, function ($q) {
             $q->where('name', 'LIKE', '%' . request()->Keyword . '%')
-                ->orWhere('name', 'LIKE', '%' . request()->Keyword . '%');
+                ->orWhere('email', 'LIKE', '%' . request()->Keyword . '%');
         })->when(!is_null(request()->status), function ($q) {
             $q->where('status', request()->status);
         });

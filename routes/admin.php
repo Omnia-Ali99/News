@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\Password\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\Password\ResetPasswordController;
+use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -48,8 +49,12 @@ Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
 Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'auth:admin'],function(){
     
     Route::resource('users',UserController::class);
+    Route::resource('categories',CategoryController::class);
+
 
     Route::get('users/status/{id}',[UserController::class,'changeStatus'])->name('users.changeStatus');
+    Route::get('Categories/status/{id}',[CategoryController::class,'changeStatus'])->name('categories.changeStatus');
+
     Route::get('home',function(){
         return view('admin.index');
     })->name('home');

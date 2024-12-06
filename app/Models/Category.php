@@ -3,10 +3,11 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory,Sluggable;
 
     protected $fillable=['id','name','slug','status','created_at','updated_at'];
 
@@ -17,5 +18,13 @@ class Category extends Model
 
     public function scopeActiveCat($q){
         $q->where('status',1);
+ }
+ public function sluggable(): array
+ {
+     return [
+         'slug' => [
+             'source' => 'name'
+         ]
+     ];
  }
 }
