@@ -49,7 +49,7 @@ Show {{$mainPost->title}}
                   </a>
                 </div>
                 <div class="alert alert-info">
-                  Publisher : {{$mainPost->user->name}}
+                  Publisher : {{$mainPost->user->name ?? $mainPost->admin->name}}
                 </div>
                 <div class="sn-content">
                   {!! chunk_split(strip_tags($mainPost->desc), 30) !!}

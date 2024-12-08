@@ -16,6 +16,11 @@ class PostController extends Controller
         $mainPost = Post::active()->with(['comments'=>function($q){
             $q->latest()->limit(3);
         }])->whereSlug($slug)->first();
+        
+        if (!$mainPost) {
+            abort(404, 'Post not found');
+        }
+        
         $category =  $mainPost->category;
         $posts_belongs_to_category = $category->posts()->active()->select('id','title','slug')->limit(5)->get();
 

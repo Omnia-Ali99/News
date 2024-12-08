@@ -26,10 +26,11 @@ class PostRequest extends FormRequest
             'desc'=>['required','min:10'],
             'small_desc'=>['required' , 'min:3' , 'max:170'],
             'category_id'=>['exists:categories,id'],
-            'comment_able'=>['in:on,off'],
-            'images'=>['nullable','array'],
-            'images.*' =>['image','mimes:jpeg,png,jpg,gif']
-            
+            'comment_able'=>['in:on,off,1,0'],
+            'images'=>['required','array'],
+            'images.*' =>['image','mimes:jpeg,png,jpg,gif'],
+            'status'=>['in:1,0'],
+
 
         ];
     }

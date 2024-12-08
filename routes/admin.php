@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\Password\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\Password\ResetPasswordController;
 use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Post\PostController;
 use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -50,10 +51,14 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'auth:admin'],funct
     
     Route::resource('users',UserController::class);
     Route::resource('categories',CategoryController::class);
+    Route::resource('posts',PostController::class);
+
 
 
     Route::get('users/status/{id}',[UserController::class,'changeStatus'])->name('users.changeStatus');
     Route::get('Categories/status/{id}',[CategoryController::class,'changeStatus'])->name('categories.changeStatus');
+    Route::get('posts/status/{id}',[PostController::class,'changeStatus'])->name('posts.changeStatus');
+    Route::post('posts/image/delete/{image_id}' , [PostController::class,'deletePostImage'])->name('posts.image.delete');
 
     Route::get('home',function(){
         return view('admin.index');
