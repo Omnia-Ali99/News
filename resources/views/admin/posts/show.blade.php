@@ -3,79 +3,88 @@
     Create User
 @endsection
 @section('body')
-  <center>
- 
-        <div class="card-body shadow mb-4 col-10">
-            <h2>User : {{$user->name}}</h2><br>
-                <img src="{{asset($user->image)}}" class="img-rounded"  style="height: 300px; width: 300px;" alt="...">
-            <br><br>
-            <div class="row ">
-                <div class="col-6">
-                    <div class="form-group ">
-                        <input disabled  class="form-control" value="Name : {{$user->name}}">
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group ">
-                        <input disabled  class="form-control" value="Username : {{$user->username}}">
-                    </div>
-                </div>
-            </div>
-            <div class="row ">
-                <div class="col-6">
-                    <div class="form-group ">
-                        <input disabled value="Email : {{$user->email}}" class="form-control" >
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group ">
-                        <input disabled value="Phone : {{$user->phone}}" class="form-control" >
-                    </div>
-                </div>
+    <div class="d-flex justify-content-center">
+        <div class="card-body shadow mb-4 container" style="max-width: 95ch">
+            <div id="newsCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#newsCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#newsCarousel" data-slide-to="1"></li>
+                    <li data-target="#newsCarousel" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" >
+                    @foreach ($post->images as $image)
+                        <div class="carousel-item @if ($loop->index == 0) active @endif">
+                            <img src="{{ asset($image->path) }}" class="d-block w-100" alt="First Slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{ $post->title }}</h5>
+                                <p>
+                                    {{-- {substr($post->desc,0,80)}} --}}
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
 
-            </div>
-            <div class="row ">
-                <div class="col-6">
-                    <div class="form-group ">
-                        <input disabled value="Status : {{$user->status == 1?'Active':'Not Active'}}" class="form-control" >
-                    </div>
+                    <!-- Add more carousel-item blocks for additional slides -->
                 </div>
-                <div class="col-6">
-                    <div class="form-group ">
-                        <input disabled value="Email Status : {{$user->email_verified_at ==null?'Not Active':'Active'}}" class="form-control" >                    
-                    </div>
-                </div>
-
+                <a class="carousel-control-prev" href="#newsCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#newsCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <div class="row ">
-                <div class="col-6">
-                    <div class="form-group ">
-                        <input disabled class="form-control" value="Country : {{$user->country}}">
-                    </div>
+            <div class="row mt-4">
+                <div class="col-5">
+                    <h5 class="">
+                        <i class="fa fa-user"></i> : {{ $post->user->name ?? $post->admin->name }}
+                    </h5>
                 </div>
-                <div class="col-6">
-                    <div class="form-group ">
-                        <input disabled class="form-control" value="City : {{$user->city}}" >
-                    </div>
+                <div class="col-3">
+                    <h5 class="">
+                        <i class="fa fa-eye"></i>: {{ $post->num_of_views }}
+                    </h5>
+                </div>
+                <div class="col-4">
+                    <h5 class="">
+                        <i class="fa fa-edit"></i> : {{ $post->created_at->format('Y-m-d h:m') }}
+                    </h5>
                 </div>
             </div>
-            <div class="row ">
-                <div class="col-6">
-                    <div class="form-group ">
-                        <input disabled  class="form-control" value="Street : {{$user->street}}">
-                    </div>
-                </div>       
-
+            <div class="row mt-2">
+                <div class="col-4">
+                    <h5 class="">
+                        comments: {{ $post->comment_able == 0 ?'Active' : 'No Active'}}
+                    </h5>
+                </div>
+                <div class="col-4">
+                    <h5 class="">
+                        status: {{ $post->status == 0 ?'Active' : 'No Active'}}
+                    </h5>
+                </div>
+                <div class="col-4">
+                    <h5 class="">
+                        category : {{ $post->category->name }}
+                    </h5>
+                </div>
             </div>
-           
             <br>
-            <a href="{{route('admin.users.changeStatus',$user->id)}}" class="btn btn-primary">{{$user->status == 1 ? 'Block':'Active'}}</a>
-            <ahref="javascript:void(0)" onclick="if(confirm('Do you want to delete the user?')){document.getElementById('delete_user').submit();} return false;"class="btn btn-info">Delete</ahref=>
+            <div class="sn-content">
+                {!! chunk_split(strip_tags($post->desc), 30) !!}
 
-            <form id="delete_user" action="{{route('admin.users.destroy',$user->id)}}" method="POST">
+            </div>
+            <br>
+            <center>
+                <a href="javascript:void(0)" class="btn btn-danger" onclick="if(confirm('Do you want to delete the post?')){document.getElementById('delete_post_{{$post->id}}').submit();} return false;">Delete Post <i class="fa fa-trash"></i></a>
+                <a class="btn btn-primary" href="{{route('admin.posts.changeStatus', $post->id)}}">Change Status <i class="fa @if($post->status ==1)fa-stop @else fa-play @endif"></i></a>
+                {{-- @if($post->user_id == null) --}}
+                <a class="btn btn-info" href="{{route('admin.posts.edit',$post->id)}}">Edit Post <i class="fa fa-edit"></i></a>
+                {{-- @endif --}}
+            </center>     
+            <form id="delete_post_{{$post->id}}" action="{{route('admin.posts.destroy',$post->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
             </form>
         </div>
-  </center>
-@endsection
+    @endsection
