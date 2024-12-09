@@ -1,5 +1,8 @@
   @extends('layouts.frontend.app')
   @section('title','Home')
+  @section('meta_desc')
+    {{ $getSetting->small_desc }}
+@endsection
   @section('breadcrumb')
   <li class="breadcrumb-item"><a href="{{route('frontend.index')}}">Home</a></li>
   @endsection

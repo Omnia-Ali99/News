@@ -53,13 +53,13 @@ public static function deleteImages($post){
       }
     }
 
- private static function generateImageName($image){
+ public static function generateImageName($image){
 
   $file = Str::uuid() .time(). $image->getClientOriginalExtension();
   return $file;
 
 }
- private static function storeImageInlocal($image, $path, $file_name,){
+public static function storeImageInlocal($image, $path, $file_name,){
 
   $path = $image->storeAs('uploads/'.$path , $file_name , ['disk'=>'uploads']);
   return  $path;

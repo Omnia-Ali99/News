@@ -22,6 +22,7 @@ class Setting extends Model
     'country',
     'city',
     'street',
+    'small_desc',
     'created_at',
     'updated_at'];
 

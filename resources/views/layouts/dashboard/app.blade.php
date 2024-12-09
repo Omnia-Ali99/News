@@ -23,6 +23,8 @@
     <link href="{{ asset('assets/vendor/file-input/css/fileinput.min.css') }}" rel="stylesheet" />
     {{-- summernote --}}
     <link href="{{ asset('assets/vendor/summernote/summernote-bs4.min.css') }}" rel="stylesheet">
+    @stack('css')
+
 </head>
 
 <body id="page-top">

@@ -35,6 +35,7 @@ class CheckSettingProvider extends ServiceProvider
                 'country'=>'Egypt',
                 'city'=>'Alex',
                 'street'=>'25 Tosson',
+                'small_desc' => 'This is a default description.',
             ]);
         });
 
