@@ -1,10 +1,12 @@
 @extends('layouts.dashboard.app')
 @section('title')
-    Create User
+    Show Post
 @endsection
 @section('body')
     <div class="d-flex justify-content-center">
         <div class="card-body shadow mb-4 container" style="max-width: 95ch">
+            <a class="btn btn-primary"  href="{{route('admin.posts.index',['post'=>request()->page])}}">Back To Posts</a>
+            <br><br>
             <div id="newsCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#newsCarousel" data-slide-to="0" class="active"></li>
@@ -55,12 +57,12 @@
             <div class="row mt-2">
                 <div class="col-4">
                     <h5 class="">
-                        comments: {{ $post->comment_able == 0 ?'Active' : 'No Active'}}
+                        comments: {{ $post->comment_able == 1 ?'Active' : 'No Active'}}
                     </h5>
                 </div>
                 <div class="col-4">
                     <h5 class="">
-                        status: {{ $post->status == 0 ?'Active' : 'No Active'}}
+                        status: {{ $post->status == 1 ?'Active' : 'No Active'}}
                     </h5>
                 </div>
                 <div class="col-4">
@@ -71,16 +73,19 @@
             </div>
             <br>
             <div class="sn-content">
+                <strong>Small Description : {{$post->small_desc}}</strong>
+            </div>
+            <br>
+            <div class="sn-content">
                 {!! chunk_split(strip_tags($post->desc), 30) !!}
-
             </div>
             <br>
             <center>
                 <a href="javascript:void(0)" class="btn btn-danger" onclick="if(confirm('Do you want to delete the post?')){document.getElementById('delete_post_{{$post->id}}').submit();} return false;">Delete Post <i class="fa fa-trash"></i></a>
                 <a class="btn btn-primary" href="{{route('admin.posts.changeStatus', $post->id)}}">Change Status <i class="fa @if($post->status ==1)fa-stop @else fa-play @endif"></i></a>
-                {{-- @if($post->user_id == null) --}}
+                @if($post->user_id == null)
                 <a class="btn btn-info" href="{{route('admin.posts.edit',$post->id)}}">Edit Post <i class="fa fa-edit"></i></a>
-                {{-- @endif --}}
+                @endif
             </center>     
             <form id="delete_post_{{$post->id}}" action="{{route('admin.posts.destroy',$post->id)}}" method="POST">
                 @csrf

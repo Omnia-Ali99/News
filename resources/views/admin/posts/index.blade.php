@@ -55,7 +55,7 @@
                         <td>
                             <a href="javascript:void(0)" onclick="if(confirm('Do you want to delete the post?')){document.getElementById('delete_post_{{$post->id}}').submit();} return false;"><i class="fa fa-trash"></i></a>
                             <a href="{{route('admin.posts.changeStatus', $post->id)}}"><i class="fa @if($post->status ==1)fa-stop @else fa-play @endif"></i></a>
-                            <a href="{{route('admin.posts.show',$post->id)}}"><i class="fa fa-eye"></i></a>
+                            <a href="{{route('admin.posts.show',['post'=>$post->id,'page'=>request()->page])}}"><i class="fa fa-eye"></i></a>
                             @if($post->user_id == null)
                             <a href="{{route('admin.posts.edit',$post->id)}}"><i class="fa fa-edit"></i></a>
                             @endif
