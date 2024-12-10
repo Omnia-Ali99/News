@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\Password\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\Password\ResetPasswordController;
@@ -53,12 +54,15 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'auth:admin'],funct
     Route::resource('users',UserController::class);
     Route::resource('categories',CategoryController::class);
     Route::resource('posts',PostController::class);
+    Route::resource('admins',AdminController::class);
+
 
 
 
     Route::get('users/status/{id}',[UserController::class,'changeStatus'])->name('users.changeStatus');
     Route::get('Categories/status/{id}',[CategoryController::class,'changeStatus'])->name('categories.changeStatus');
     Route::get('posts/status/{id}',[PostController::class,'changeStatus'])->name('posts.changeStatus');
+    Route::get('admins/status/{id}',[AdminController::class,'changeStatus'])->name('admins.changeStatus');
     Route::post('posts/image/delete/{image_id}' , [PostController::class,'deletePostImage'])->name('posts.image.delete');
 
 
