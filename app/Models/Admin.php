@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 class Admin extends Authenticatable
 {
     use HasFactory,Notifiable;
-    protected $fillable=['id','name','username','status','email','password','created_at','updated_at'];
+    protected $fillable=['id','name','username','role_id','status','email','password','created_at','updated_at'];
 
     protected $hidden = [
         'password',
@@ -26,6 +26,9 @@ class Admin extends Authenticatable
 
     public function posts(){
        return $this->hasMany(Post::class, 'admin_id');
+    }
+    public function authorization(){
+        return $this->belongsTo(Authorization::class,'role_id');
     }
 
 }

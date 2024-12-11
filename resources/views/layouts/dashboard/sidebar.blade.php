@@ -27,7 +27,6 @@
         Interface
     </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
@@ -43,7 +42,6 @@
         </div>
     </li>
 
-    <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
@@ -71,6 +69,23 @@
                 <h6 class="collapse-header">Admin Management:</h6>
                 <a class="collapse-item" href="{{route('admin.admins.index')}}">Admin</a>
                 <a class="collapse-item" href="{{route('admin.admins.create')}}">Add Admin</a>
+
+            </div>
+        </div>
+    </li>
+
+        <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#authorizations"
+            aria-expanded="true" aria-controls="authorizations">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Authorizations</span>
+        </a>
+        <div id="authorizations" class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Authorizations:</h6>
+                <a class="collapse-item" href="{{route('admin.authorizations.index')}}">Roles</a>
+                <a class="collapse-item" href="{{route('admin.authorizations.create')}}">Create Role</a>
 
             </div>
         </div>

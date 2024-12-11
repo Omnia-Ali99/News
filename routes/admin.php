@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\Password\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\Password\ResetPasswordController;
+use App\Http\Controllers\Admin\Authorization\AuthorizationController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Post\PostController;
 use App\Http\Controllers\admin\setting\SettingController;
@@ -50,7 +51,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
 
 
 Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'auth:admin'],function(){
-    
+
+    Route::resource('authorizations',AuthorizationController::class);
     Route::resource('users',UserController::class);
     Route::resource('categories',CategoryController::class);
     Route::resource('posts',PostController::class);

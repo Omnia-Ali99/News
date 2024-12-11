@@ -6,6 +6,8 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
+use App\Models\Authorization;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
@@ -20,7 +22,7 @@ class AdminController extends Controller
         $limit_by = request()->limit_by ?? 5;
 
 
-        $admins = Admin::when(request()->Keyword, function ($q) {
+        $admins = Admin::where('id','!=', Auth::guard('admin')->user()->id)->when(request()->Keyword, function ($q) {
             $q->where('name', 'LIKE', '%' . request()->Keyword . '%')
                 ->orWhere('email', 'LIKE', '%' . request()->Keyword . '%')
                 ->orWhere('username', 'LIKE', '%' . request()->Keyword . '%');
@@ -57,7 +59,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.admins.create');
+        $authorizations =Authorization::select('id','role')->get();
+        return view('admin.admins.create',compact('authorizations'));
 
     }
 
@@ -87,16 +90,23 @@ class AdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $admin =Admin::findOrFail($id);
+        $authorizations =Authorization::select('id','role')->get();
+        return view('admin.admins.update',compact('authorizations','admin'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AdminRequest $request, string $id)
     {
-        //
-    }
+        $admin = Admin::findOrFail($id);
+        $admin = $admin->update($request->except(['_token']));
+        if(!$admin){
+            return redirect()->back()->with('error',value: 'Try Again Latter!');
+        }
+        return redirect()->back()->with('success',value: 'admin updated successfully');   
+     }
 
     /**
      * Remove the specified resource from storage.
