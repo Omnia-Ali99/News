@@ -1,11 +1,13 @@
 <?php
 return [
-    'premessions'=>[
-        'posts'=>'Posts',
-        'categories'=>'Categories',
-        'settings'=>'Settings',
-        'users'=>'Users',
-        'admins'=>'Admins',
-        'contacts'=>'contacts',
+    'permissions'=>[
+        'posts'             =>'Management Posts',
+        'categories'        =>'Management Categories',
+        'settings'          =>'Management Settings',
+        'users'             =>'Management Users',
+        'admins'            =>'Management Admins',
+        'contacts'          =>'Management contacts',
+        'home'              =>'Management Dashboard Home',
+        'authorizations'    =>'Management Authorizations',
     ],
 ];

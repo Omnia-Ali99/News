@@ -10,8 +10,8 @@ use Illuminate\Notifications\Notifiable;
 
 class Admin extends Authenticatable
 {
-    use HasFactory,Notifiable;
-    protected $fillable=['id','name','username','role_id','status','email','password','created_at','updated_at'];
+    use HasFactory, Notifiable;
+    protected $fillable = ['id', 'name', 'username', 'role_id', 'status', 'email', 'password', 'created_at', 'updated_at'];
 
     protected $hidden = [
         'password',
@@ -20,15 +20,30 @@ class Admin extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password'=>'hashed'
+        'password' => 'hashed'
 
     ];
 
-    public function posts(){
-       return $this->hasMany(Post::class, 'admin_id');
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'admin_id');
     }
-    public function authorization(){
-        return $this->belongsTo(Authorization::class,'role_id');
+    public function authorization()
+    {
+        return $this->belongsTo(Authorization::class, 'role_id');
     }
 
+    public function hasAccess($config_permissions)
+    {
+        $authorization = $this->authorization;
+
+        if (!$authorization) {
+            return false;
+        }
+        foreach ($authorization->permissions as $permission) {
+            if ($config_permissions == $permission ?? false) {
+                return true;
+            }
+        }
+    }
 }

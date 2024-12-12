@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
+
+    public function __construct(){
+       $this ->middleware('can:categories');
+    }   
     /**
      * Display a listing of the resource.
      */

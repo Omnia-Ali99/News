@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('authorizations', function (Blueprint $table) {
             $table->id();
             $table->string('role');
-            $table->json('premessions');
+            $table->json('permissions');
             $table->timestamps();
         });
     }

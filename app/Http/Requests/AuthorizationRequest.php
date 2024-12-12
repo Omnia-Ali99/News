@@ -23,7 +23,7 @@ class AuthorizationRequest extends FormRequest
     {
         return [
             'role'=>['required','min:3','max:50'],
-            'premessions'=>['required','array','min:1'],
+            'permissions'=>['required','array','min:1'],
         ];
     }
 }

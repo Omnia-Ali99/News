@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:admins');
+    }
     /**
      * Display a listing of the resource.
      */

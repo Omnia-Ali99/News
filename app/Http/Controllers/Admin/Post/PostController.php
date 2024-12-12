@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:posts');
+    }
+    
     /**
      * Display a listing of the resource.
      */

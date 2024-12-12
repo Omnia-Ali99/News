@@ -10,6 +10,10 @@ use App\Http\Requests\AuthorizationRequest;
 
 class AuthorizationController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('can:authorizations');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -88,7 +92,7 @@ class AuthorizationController extends Controller
 
 private function roles($authorization ,$request){
     $authorization->role =$request->role;
-    $authorization->premessions = json_encode($request->premessions);
+    $authorization->permissions = json_encode($request->permissions);
     $authorization->save();
 }
 }

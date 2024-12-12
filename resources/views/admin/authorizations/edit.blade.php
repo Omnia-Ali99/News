@@ -32,11 +32,11 @@
 
 
                 <div class="row ">
-                    @foreach (config('authorization.premessions') as $key => $value)
+                    @foreach (config('authorization.permissions') as $key => $value)
                         <div class="col-3">
                             <div class="form-group ">
                                 <div class="form-check ">
-                                    <input class="form-check-input" @checked(in_array($key,$authorization->premessions)) value="{{ $key }}" name="premessions[]"
+                                    <input class="form-check-input" @checked(in_array($key,$authorization->permissions)) value="{{ $key }}" name="permissions[]"
                                         type="checkbox">
                                     <label class="form-check-label">
                                         {{ $value }}
@@ -47,7 +47,7 @@
                         </div>
                     @endforeach
                  <div class="col-9">
-                    @error('premessions')
+                    @error('permissions')
                         <strong class="text-danger">{{ $message }}</strong>
                     @enderror
                  </div>

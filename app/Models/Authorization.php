@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Authorization extends Model
 {
     use HasFactory;
-    protected $fillable =['role','premessions','created_at','updated_at'];
+    protected $fillable =['role','permissions','created_at','updated_at'];
     
-    public function getpremessionsAttribute($premessions)
+    public function getpermissionsAttribute($permissions)
 {
-   return json_decode($premessions);
+   return json_decode($permissions);
 }
 public function admins(){
     return $this->hasMany(Admin::class ,'role_id');

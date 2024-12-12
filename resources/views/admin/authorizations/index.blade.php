@@ -26,7 +26,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Role</th>
-                                <th>Premessions</th>
+                                <th>permissions</th>
                                 <th>Related Admins</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
@@ -36,7 +36,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Role</th>
-                                <th>Premessions</th>
+                                <th>permissions</th>
                                 <th>Related Admins</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
@@ -48,8 +48,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $authorization->role }}</td>
                                     <td>
-                                        @foreach ($authorization->premessions as $premession)
-                                            {{ $premession }},
+                                        @foreach ($authorization->permissions as $permission)
+                                            {{ $permission }},
                                         @endforeach
                                     </td>
                                     <td>{{$authorization->admins->count()}}</td>

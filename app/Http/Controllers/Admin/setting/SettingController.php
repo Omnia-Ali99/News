@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Session;
 
 class SettingController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:settings');
+    }
     public function index()
     {
         return view('admin.settings.index');
