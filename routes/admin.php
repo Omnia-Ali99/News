@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Auth\Password\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\Password\ResetPasswordController;
 use App\Http\Controllers\Admin\Authorization\AuthorizationController;
 use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Contact\ContactController;
 use App\Http\Controllers\Admin\Post\PostController;
 use App\Http\Controllers\admin\setting\SettingController;
 use App\Http\Controllers\Admin\User\UserController;
@@ -72,6 +73,14 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'auth:admin'],funct
         Route::get('/','index')->name('index');
         Route::post('/','update')->name('update');
     });
+
+    Route::controller(ContactController::class)->prefix('contacts')->name('contacts.')->group(function(){
+        Route::get('/','index')->name('index');
+        Route::get('/show/{id}','show')->name('show');
+        Route::delete('/destroy/{id}','destroy')->name('destroy');
+
+    });
+
 
     Route::get('home',function(){
         return view('admin.index');

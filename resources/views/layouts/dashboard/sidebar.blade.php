@@ -163,6 +163,15 @@
      </li>
     @endcan
 
+      @can('contacts')
+     <!-- Nav Item - Tables -->
+     <li class="nav-item">
+         <a class="nav-link" href="{{ route('admin.contacts.index') }}">
+             <i class="fas fa-fw fa-table"></i>
+             <span>Contacts</span></a>
+     </li>
+    @endcan
+
      <!-- Divider -->
      <hr class="sidebar-divider d-none d-md-block">
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('body');
             $table->string('phone');
+            $table->boolean('status')->default(value: false);
             $table->string('ip_address');
             $table->timestamps();
         });

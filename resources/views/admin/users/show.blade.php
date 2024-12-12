@@ -70,7 +70,7 @@
            
             <br>
             <a href="{{route('admin.users.changeStatus',$user->id)}}" class="btn btn-primary">{{$user->status == 1 ? 'Block':'Active'}}</a>
-            <ahref="javascript:void(0)" onclick="if(confirm('Do you want to delete the user?')){document.getElementById('delete_user').submit();} return false;"class="btn btn-info">Delete</ahref=>
+            <a href="javascript:void(0)" onclick="if(confirm('Do you want to delete the user?')){document.getElementById('delete_user').submit();} return false;"class="btn btn-info">Delete</a>
 
             <form id="delete_user" action="{{route('admin.users.destroy',$user->id)}}" method="POST">
                 @csrf
