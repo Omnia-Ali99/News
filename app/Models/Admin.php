@@ -46,4 +46,9 @@ class Admin extends Authenticatable
             }
         }
     }
+
+    public function receivesBroadcastNotificationsOn(): string
+    {
+        return 'admins.'.$this->id;
+    }
 }

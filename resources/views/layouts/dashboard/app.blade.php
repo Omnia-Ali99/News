@@ -93,7 +93,15 @@
             </div>
         </div>
     </div>
-
+    
+    @auth
+        <script>
+            role ="admin";
+            adminId = "{{ auth('admin')->user()->id }}";
+        </script>
+    @endauth
+    <script src="{{ asset('build/assets/app-a9d49851.js') }}"></script>
+    
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('assets/admin') }}/vendor/jquery/jquery.min.js"></script>
     <script src="{{ asset('assets/admin') }}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -117,6 +125,14 @@
 
     {{-- summernote --}}
     <script src="{{ asset('assets/vendor/summernote/summernote-bs4.min.js') }}"></script>
+
+    @auth
+    <script>
+        role ="admin";
+        adminId = "{{ auth('admin')->user()->id }}";
+    </script>
+@endauth
+<script src="{{ asset('build/assets/app-472f4a01.js') }}"></script>
     @stack('js')
 </body>
 

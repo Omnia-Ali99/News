@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ContactRequest;
+use App\Models\Admin;
 use App\Models\Contact;
+use App\Notifications\NewContactNotify;
 use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class ContactController extends Controller
 {
@@ -26,6 +29,10 @@ class ContactController extends Controller
     ]);
     
      $contact =Contact::create($request->except('_token'));
+
+     $admins = Admin::get();
+     Notification::send($admins , new NewContactNotify($contact));
+
 
      if(!$contact){
         Session::flash('error','Contact us failed');

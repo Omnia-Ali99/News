@@ -37,11 +37,13 @@
     @include('layouts.frontend.header')
 
     @auth
-        <script>
-            id = "{{ auth()->user()->id }}";
-        </script>
-    @endauth
-    <script src="{{ asset('build/assets/app-37257930.js') }}"></script>
+    <script>
+        role = "user";
+        userId = "{{ auth()->user()->id }}";
+    </script>
+@endauth
+<script src="{{ asset('build/assets/app-472f4a01.js') }}"></script>
+
     <!-- Breadcrumb Start -->
     <div class="breadcrumb-wrap">
         <div class="container">
