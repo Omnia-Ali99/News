@@ -50,7 +50,8 @@
          <li class="nav-item">
              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                  aria-expanded="true" aria-controls="collapseUtilities">
-                 <i class="fas fa-fw fa-wrench"></i>
+                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+
                  <span>Setting</span>
              </a>
              <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Authorization\AuthorizationController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Contact\ContactController;
 use App\Http\Controllers\Admin\Post\PostController;
+use App\Http\Controllers\Admin\Profile\ProfileController;
 use App\Http\Controllers\admin\setting\SettingController;
 use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -74,6 +75,10 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'auth:admin'],funct
         Route::post('/','update')->name('update');
     });
 
+    Route::controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function(){
+        Route::get('/','index')->name('index');
+        Route::post('/','update')->name('update');
+    });
     Route::controller(ContactController::class)->prefix('contacts')->name('contacts.')->group(function(){
         Route::get('/','index')->name('index');
         Route::get('/show/{id}','show')->name('show');
