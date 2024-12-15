@@ -24,7 +24,7 @@
     {{-- summernote --}}
     <link href="{{ asset('assets/vendor/summernote/summernote-bs4.min.css') }}" rel="stylesheet">
     @stack('css')
-
+    @livewireStyles
 </head>
 
 <body id="page-top">
@@ -134,6 +134,7 @@
 @endauth
 <script src="{{ asset('build/assets/app-472f4a01.js') }}"></script>
     @stack('js')
+    @livewireScripts
 </body>
 
 </html>

@@ -6,7 +6,7 @@
                 <select name="sort_by" class="form-control">
                 <option selected disabled>Sort By</option>
                 <option value="id">Id</option>
-                <option value="name">name</option>
+                {{-- <option value="name">name</option> --}}
                 <option value="created_at">created at</option>
               </select>
             </div>
