@@ -46,7 +46,7 @@ Route::group([
     });
    Route::match(['get', 'post'],'search',SearchController::class)->name('search');
 
-   Route::prefix('account/')->name('dashboard.')->middleware(['auth:web'])->group(function(){
+   Route::prefix('account/')->name('dashboard.')->middleware(['auth:web','CheckUserStatus'])->group(function(){
 
     Route::controller(ProfileController::class)->group(function(){
         Route::get('profile','index')->name('profile');
@@ -76,6 +76,9 @@ Route::group([
 
    });
 
+   Route ::get('wait',function(){
+       return view('frontend.wait');
+   })->name('wait');
 });
 
 

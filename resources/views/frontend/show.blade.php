@@ -58,6 +58,7 @@ Show {{$mainPost->title}}
                
             @auth
                     <!-- Comment Section -->
+                    @if(auth('web')->user()->status != 0)
                     <div class="comment-section">
                       <!-- Comment Input -->
                       @if ($mainPost->comment_able == true)
@@ -98,6 +99,7 @@ Show {{$mainPost->title}}
                       <button id="showMoreBtn" class="show-more-btn">Show more</button>
                       @endif
                     </div>
+                    @endif
             @endauth
   
                 <!-- Related News -->
