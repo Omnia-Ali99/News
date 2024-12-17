@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Post;
 
 use App\Models\Post;
 use App\Models\Image;
+use App\Models\Comment;
 use App\Models\Category;
 use App\Utils\ImageManger;
 use Illuminate\Http\Request;
@@ -87,7 +88,7 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::with('comments')->findOrFail($id);
         return view('admin.posts.show',compact(['post'])) ;
     }
 
@@ -177,4 +178,12 @@ class PostController extends Controller
         ]);
     
       }
+    
+      public function deleteComment($id){
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+        Session::flash('success','Comment Deleted Successfully');
+        return redirect()->back();
+      }
+ 
 }

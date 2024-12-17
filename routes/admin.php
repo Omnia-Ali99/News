@@ -66,6 +66,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
     Route::get('users/status/{id}', [UserController::class, 'changeStatus'])->name('users.changeStatus');
     Route::get('Categories/status/{id}', [CategoryController::class, 'changeStatus'])->name('categories.changeStatus');
     Route::get('posts/status/{id}', [PostController::class, 'changeStatus'])->name('posts.changeStatus');
+    Route::get('posts/comment/delete/{id}', [PostController::class, 'deleteComment'])->name('posts.deleteComment');
     Route::get('admins/status/{id}', [AdminController::class, 'changeStatus'])->name('admins.changeStatus');
     Route::post('posts/image/delete/{image_id}', [PostController::class, 'deletePostImage'])->name('posts.image.delete');
 
