@@ -9,7 +9,8 @@ return [
         'contacts'          =>'Management contacts',
         'home'              =>'Management Dashboard Home',
         'authorizations'    =>'Management Authorizations',
-        'profile'            =>'Management profile',
+        'profile'           =>'Management profile',
+        'notification'       =>'Management notification',
 
     ],
 ];

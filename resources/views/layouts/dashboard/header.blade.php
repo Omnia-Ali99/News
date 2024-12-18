@@ -47,42 +47,44 @@
         </li>
 
         <!-- Nav Item - Alerts -->
-        <li class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts -->
-                <span id="count_notify" class="badge badge-danger badge-counter">{{Auth::guard('admin')->user()->unreadNotifications ->count()}}</span>
-                
+     @can('notification')
+     <li class="nav-item dropdown no-arrow mx-1">
+        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell fa-fw"></i>
+            <!-- Counter - Alerts -->
+            <span id="count_notify" class="badge badge-danger badge-counter">{{Auth::guard('admin')->user()->unreadNotifications ->count()}}</span>
+            
+        </a>
+        <!-- Dropdown - Alerts -->
+     
+        <div id="notify_push" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+            aria-labelledby="alertsDropdown">
+            {{-- <h6 class="dropdown-header">
+                Notifications
+            </h6> --}}
+            @forelse (Auth::guard('admin')->user()->unreadNotifications  as $notify)
+            <a class="dropdown-item d-flex align-items-center" href="{{ $notify->data['link'] }}?notify_admin={{ $notify->id }}">
+                <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                        <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="small text-gray-500">{{$notify->data['date']}}</div>
+                    <span class="font-weight-bold">{{$notify->data['contact_title']}}</span>
+                </div>
             </a>
-            <!-- Dropdown - Alerts -->
-         
-            <div id="notify_push" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                aria-labelledby="alertsDropdown">
-                {{-- <h6 class="dropdown-header">
-                    Notifications
-                </h6> --}}
-                @forelse (Auth::guard('admin')->user()->unreadNotifications  as $notify)
-                <a class="dropdown-item d-flex align-items-center" href="{{ $notify->data['link'] }}?notify_admin={{ $notify->id }}">
-                    <div class="mr-3">
-                        <div class="icon-circle bg-primary">
-                            <i class="fas fa-file-alt text-white"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="small text-gray-500">{{$notify->data['date']}}</div>
-                        <span class="font-weight-bold">{{$notify->data['contact_title']}}</span>
-                    </div>
-                </a>
-                
-                @empty
-                    <p>No Notification Yet</p>
-                @endforelse
-              
-                
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-            </div>
-        </li>
+            <a class="dropdown-item text-center small text-gray-500" href="{{route('admin.notification.index')}}">Show All Notification</a>
+            @empty
+                <a class="dropdown-item text-center small text-gray-500" href="{{route('admin.notification.index')}}">No Notification Yet</a>
+
+            @endforelse
+          
+            
+        </div>
+    </li>
+     @endcan
 
         <!-- Nav Item - Messages -->
         <li class="nav-item dropdown no-arrow mx-1">

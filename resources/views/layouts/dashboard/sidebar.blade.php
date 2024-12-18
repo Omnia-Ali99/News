@@ -13,13 +13,13 @@
      <hr class="sidebar-divider my-0">
 
      <!-- Nav Item - Dashboard -->
-   @can('home')
-     <li class="nav-item active">
-         <a class="nav-link" href="{{route('admin.home')}}">
-             <i class="fas fa-fw fa-tachometer-alt"></i>
-             <span>Dashboard</span></a>
-     </li>
-   @endcan
+     @can('home')
+         <li class="nav-item active">
+             <a class="nav-link" href="{{ route('admin.home') }}">
+                 <i class="fas fa-fw fa-tachometer-alt"></i>
+                 <span>Dashboard</span></a>
+         </li>
+     @endcan
 
      <!-- Divider -->
      <hr class="sidebar-divider">
@@ -28,6 +28,65 @@
      <div class="sidebar-heading">
          Interface
      </div>
+     @can('admins')
+         <li class="nav-item">
+             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Admins" aria-expanded="true"
+                 aria-controls="Admins">
+                 <i class="fas fa-fw fa-users"></i>
+                 <span>Admins</span>
+             </a>
+             <div id="Admins" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                 <div class="bg-white py-2 collapse-inner rounded">
+                     <h6 class="collapse-header">Admin Management:</h6>
+                     <a class="collapse-item" href="{{ route('admin.admins.index') }}">Admin</a>
+                     <a class="collapse-item" href="{{ route('admin.admins.create') }}">Add Admin</a>
+
+                 </div>
+             </div>
+         </li>
+     @endcan
+     @can('authorizations')
+         <li class="nav-item">
+             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#authorizations"
+                 aria-expanded="true" aria-controls="authorizations">
+                 <i class="fas fa-fw fa-wrench"></i>
+                 <span>Authorizations</span>
+             </a>
+             <div id="authorizations" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                 <div class="bg-white py-2 collapse-inner rounded">
+                     <h6 class="collapse-header">Authorizations:</h6>
+                     <a class="collapse-item" href="{{ route('admin.authorizations.index') }}">Roles</a>
+                     <a class="collapse-item" href="{{ route('admin.authorizations.create') }}">Create Role</a>
+
+                 </div>
+             </div>
+         </li>
+     @endcan
+
+     @can('users')
+         <!-- Nav Item - users -->
+         <li class="nav-item">
+             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
+                 aria-expanded="true" aria-controls="collapseUsers">
+                 <i class="fas fa-fw fa-users"></i>
+                 <span>User Management</span>
+             </a>
+             <div id="collapseUsers" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                 <div class="bg-white py-2 collapse-inner rounded">
+                     <a class="collapse-item" href="{{ route('admin.users.index') }}">Users</a>
+                     <a class="collapse-item" href="{{ route('admin.users.create') }}">Add User</a>
+                 </div>
+             </div>
+         </li>
+     @endcan
+     @can('categories')
+         <!-- Nav Item - Tables -->
+         <li class="nav-item">
+             <a class="nav-link" href="{{ route('admin.categories.index') }}">
+                 <i class="fas fa-fw fa-table"></i>
+                 <span>Categories</span></a>
+         </li>
+     @endcan
 
      @can('posts')
          <li class="nav-item">
@@ -46,60 +105,7 @@
          </li>
      @endcan
 
-     @can('settings')
-         <li class="nav-item">
-             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                 aria-expanded="true" aria-controls="collapseUtilities">
-                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-
-                 <span>Setting</span>
-             </a>
-             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                 data-parent="#accordionSidebar">
-                 <div class="bg-white py-2 collapse-inner rounded">
-                     <h6 class="collapse-header">Setting Management:</h6>
-                     <a class="collapse-item" href="{{ route('admin.settings.index') }}">Setting</a>
-                 </div>
-             </div>
-         </li>
-     @endcan
-
-     @can('admins')
-         <li class="nav-item">
-             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Admins" aria-expanded="true"
-                 aria-controls="Admins">
-                 <i class="fas fa-fw fa-users"></i>
-                 <span>Admins</span>
-             </a>
-             <div id="Admins" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                 <div class="bg-white py-2 collapse-inner rounded">
-                     <h6 class="collapse-header">Admin Management:</h6>
-                     <a class="collapse-item" href="{{ route('admin.admins.index') }}">Admin</a>
-                     <a class="collapse-item" href="{{ route('admin.admins.create') }}">Add Admin</a>
-
-                 </div>
-             </div>
-         </li>
-     @endcan
-
-
-     @can('authorizations')
-         <li class="nav-item">
-             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#authorizations"
-                 aria-expanded="true" aria-controls="authorizations">
-                 <i class="fas fa-fw fa-users"></i>
-                 <span>Authorizations</span>
-             </a>
-             <div id="authorizations" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                 <div class="bg-white py-2 collapse-inner rounded">
-                     <h6 class="collapse-header">Authorizations:</h6>
-                     <a class="collapse-item" href="{{ route('admin.authorizations.index') }}">Roles</a>
-                     <a class="collapse-item" href="{{ route('admin.authorizations.create') }}">Create Role</a>
-
-                 </div>
-             </div>
-         </li>
-     @endcan
+  
 
      <!-- Divider -->
      <hr class="sidebar-divider">
@@ -109,7 +115,7 @@
          Addons
      </div>
 
-   
+
      <!-- Nav Item - Pages Collapse Menu -->
      {{-- <li class="nav-item">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -131,22 +137,7 @@
          </div>
      </li>
      --}}
-    @can('users')
-     <!-- Nav Item - users -->
-     <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
-             aria-expanded="true" aria-controls="collapseUsers">
-             <i class="fas fa-fw fa-users"></i>
-             <span>User Management</span>
-         </a>
-         <div id="collapseUsers" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-             <div class="bg-white py-2 collapse-inner rounded">
-                 <a class="collapse-item" href="{{ route('admin.users.index') }}">Users</a>
-                 <a class="collapse-item" href="{{ route('admin.users.create') }}">Add User</a>
-             </div>
-         </div>
-     </li>
-    @endcan
+
 
      <!-- Nav Item - Charts -->
      {{-- <li class="nav-item">
@@ -155,23 +146,43 @@
              <span>Charts</span></a>
      </li> --}}
 
-    @can('categories')
-     <!-- Nav Item - Tables -->
+     @can('settings')
      <li class="nav-item">
-         <a class="nav-link" href="{{ route('admin.categories.index') }}">
-             <i class="fas fa-fw fa-table"></i>
-             <span>Categories</span></a>
-     </li>
-    @endcan
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+             aria-expanded="true" aria-controls="collapseUtilities">
+             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 
-      @can('contacts')
-     <!-- Nav Item - Tables -->
-     <li class="nav-item">
-         <a class="nav-link" href="{{ route('admin.contacts.index') }}">
-             <i class="fas fa-fw fa-table"></i>
-             <span>Contacts</span></a>
+             <span>Setting</span>
+         </a>
+         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+             data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+                 <h6 class="collapse-header">Setting Management:</h6>
+                 <a class="collapse-item" href="{{ route('admin.settings.index') }}">Setting</a>
+             </div>
+         </div>
      </li>
-    @endcan
+ @endcan
+
+
+     @can('contacts')
+         <!-- Nav Item - Tables -->
+         <li class="nav-item">
+             <a class="nav-link" href="{{ route('admin.contacts.index') }}">
+                 <i class="fa fa-envelope"></i>
+
+                 <span>Contacts</span></a>
+         </li>
+     @endcan
+
+     @can('notification')
+         <!-- Nav Item - Tables -->
+         <li class="nav-item">
+             <a class="nav-link" href="{{ route('admin.notification.index') }}">
+                 <i class="fas fa-bell fa-fw"></i>
+                 <span>Notification</span></a>
+         </li>
+     @endcan
 
      <!-- Divider -->
      <hr class="sidebar-divider d-none d-md-block">

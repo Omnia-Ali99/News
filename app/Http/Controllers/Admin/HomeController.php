@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 class HomeController extends Controller
 {
-    public function index(){
+    public function __construct(){
+        $this->middleware('can:home');
+    }
+    
+        public function index(){
         $chart_options = [
             'chart_title' => 'Posts by months',
             'report_type' => 'group_by_date',

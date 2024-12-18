@@ -108,7 +108,7 @@
 
                         </div>
                         @forelse ($post->comments as $comment)
-                            <div class="notification alert alert-info">
+                            <div class=" alert alert-info">
                                 <strong>
                                     <img src="{{ asset($comment->user->image) }}" style="width: 60px; height:60px"
                                         class="img-thumbnail  rounded-circle " alt="" />

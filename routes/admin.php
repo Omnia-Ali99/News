@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Authorization\AuthorizationController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Contact\ContactController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\Notification\NotificationController;
 use App\Http\Controllers\Admin\Post\PostController;
 use App\Http\Controllers\Admin\Profile\ProfileController;
 use App\Http\Controllers\admin\setting\SettingController;
@@ -84,5 +85,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
         Route::get('/', 'index')->name('index');
         Route::get('/show/{id}', 'show')->name('show');
         Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+    });
+
+    Route::controller(NotificationController::class)->prefix('notification')->name('notification.')->group(function () {
+        Route::get('/','index' )->name('index');
+        Route::post('/delete','delete')->name('delete');
+        Route::get('/delete-all','deleteAll')->name('deleteAll');
+
+
     });
 });
