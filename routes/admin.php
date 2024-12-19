@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Auth\Password\ResetPasswordController;
 use App\Http\Controllers\Admin\Authorization\AuthorizationController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Contact\ContactController;
+use App\Http\Controllers\Admin\GeneralSearchController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Notification\NotificationController;
 use App\Http\Controllers\Admin\Post\PostController;
@@ -54,6 +55,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin'], function () {
     Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::get('search', [GeneralSearchController::class, 'search'])->name('search');
 
     Route::resource('authorizations', AuthorizationController::class);
     Route::resource('users', UserController::class);
