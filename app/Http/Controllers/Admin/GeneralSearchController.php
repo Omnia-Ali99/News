@@ -13,21 +13,38 @@ class GeneralSearchController extends Controller
 {
     public function search(Request $request){
        if($request->option == 'user'){
-        $users = User::where('name','LIKE','%'. $request->keyword . '%')->paginate(6);
-        return view('admin.users.index',compact('users'));
+        return $this->searchUsers($request);
+             
        } elseif($request->option == 'post'){
-        $posts = Post::where('title','LIKE','%'. $request->keyword . '%')->paginate(6);
-        return view('admin.posts.index',compact('posts'));
+        return $this->searchPosts($request);
+
        }elseif($request->option == 'category'){
-        $categories = Category::where('name','LIKE','%'. $request->keyword . '%')->paginate(6);
-        return view('admin.categories.index',compact('categories'));
+        return $this->searchCategories($request);
+
        }elseif($request->option == 'contact'){
-        $contacts = Contact::where('name','LIKE','%'. $request->keyword . '%')->paginate(6);
-        return view('admin.contacts.index',compact('contacts'));
+        return $this->searchContacts($request);
+
        }else{
         return redirect()->back();
        }
 
+    }
+
+    private function searchUsers($request){
+        $users = User::where('name','LIKE','%'. $request->keyword . '%')->paginate(6);
+        return view('admin.users.index',compact('users'));
+    }
+    private function searchPosts($request){
+        $posts = Post::where('title','LIKE','%'. $request->keyword . '%')->paginate(6);
+        return view('admin.posts.index',compact('posts'));
+    }
+    private function searchCategories($request){
+        $categories = Category::where('name','LIKE','%'. $request->keyword . '%')->paginate(6);
+        return view('admin.categories.index',compact('categories'));
+    }
+    private function searchContacts($request){
+        $contacts = Contact::where('name','LIKE','%'. $request->keyword . '%')->paginate(6);
+        return view('admin.contacts.index',compact('contacts'));
     }
     
 }
