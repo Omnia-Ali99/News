@@ -21,11 +21,18 @@
                         @forelse ($latest_posts as $post)
                             <tr>
                                 <td>
-                                    <a href="{{route('admin.posts.show',$post->id)}}">{{ Str::limit($post->title,20) }}</a>
+                                  @can('posts')
+                                  <a
+                                  href="{{ route('admin.posts.show', $post->id) }}">{{ Str::limit($post->title, 20) }}
+                                </a>
+                                  @endcan
+                                  @cannot('posts')
+                                  {{ Str::limit($post->title, 20) }}
+                                  @endcannot
                                 </td>
-                                <td>{{ $post->category->name}}</td>
+                                <td>{{ $post->category->name }}</td>
                                 <td>{{ $post->comments_count }}</td>
-                                <td>{{ $post->status == 0 ?'Not Active':'Active' }}</td>
+                                <td>{{ $post->status == 0 ? 'Not Active' : 'Active' }}</td>
                             </tr>
                         @empty
                         @endforelse
@@ -56,20 +63,24 @@
                     </thead>
                     <tbody>
                         @forelse ($latest_comments as $comment)
-                        <tr>
-                            <td>{{$comment->user->name}}</td>
-                            <td>
-                                <a href="{{route('admin.posts.show',$comment->post->id)}}">
-                                    {{Str::limit($comment->post->title,20)}}
+                            <tr>
+                                <td>{{ $comment->user->name }}</td>
+                                <td>
+                                   @can('posts')
+                                   <a href="{{ route('admin.posts.show', $comment->post->id) }}">
+                                    {{ Str::limit($comment->post->title, 20) }}
                                 </a>
-                            </td>
-                            <td>{{Str::limit($comment->comment ,40)}}</td>
-                            <td>{{ $comment->status == 0 ?'Not Active':'Active' }}</td>
+                                   @endcan
+                                   @cannot('posts')
+                                   {{ Str::limit($comment->post->title, 20) }}
+                                   @endcannot
+                                </td>
+                                <td>{{ Str::limit($comment->comment, 40) }}</td>
+                                <td>{{ $comment->status == 0 ? 'Not Active' : 'Active' }}</td>
 
-                          
-                        </tr>
+
+                            </tr>
                         @empty
-                            
                         @endforelse
                     </tbody>
                 </table>

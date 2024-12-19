@@ -25,6 +25,17 @@ class LoginController extends Controller
         $request->validate($this->filterData());
 
         if(Auth::guard('admin')->attempt(['email'=>$request->email,'password'=>$request->password],$request->remember)){
+
+           $permissions = Auth::guard('admin')->user()->authorization->permissions;
+
+           $first_permission = $permissions[0];
+           
+           if(!in_array('home',$permissions)){
+
+            return redirect()->intended('admin/'.$first_permission);
+
+           }
+           
             return redirect()->intended(RouteServiceProvider::AdminHome);
         }
            return redirect()->back()->withErrors(['email'=>'credentials dose not match!']);

@@ -54,6 +54,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin'], function () {
+
+    Route::fallback(function(){
+        return response()->view('errors.404');
+    });
+
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('search', [GeneralSearchController::class, 'search'])->name('search');
 
