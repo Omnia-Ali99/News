@@ -15,6 +15,7 @@
                 <div class="row ">
                     <div class="col-6">
                         <div class="form-group ">
+                            <label class="form-label">Site Name :</label>
                             <input type="text" name="site_name"  value="{{$getSetting->site_name}}" class="form-control" placeholder="Enter Site Name">
                             @error('site_name')
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -23,6 +24,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group ">
+                            <label class="form-label">Email :</label>
                             <input type="text" name="email" value="{{$getSetting->email}}" class="form-control" placeholder="Enter Email">
                             @error('email')
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -33,6 +35,7 @@
                 <div class="row ">
                     <div class="col-6">
                         <div class="form-group ">
+                            <label class="form-label">Phone :</label>
                             <input type="text"  value="{{$getSetting->phone}}" name="phone" class="form-control" placeholder="Enter Phone">
                             @error('phone')
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -41,6 +44,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group ">
+                            <label class="form-label">Country :</label>
                             <input type="text" name="country"  value="{{$getSetting->country}}" class="form-control" placeholder="Enter Country Name">
                             @error('country')
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -52,6 +56,7 @@
                 <div class="row ">
                     <div class="col-6">
                         <div class="form-group ">
+                            <label class="form-label">City :</label>
                             <input type="text" name="city" value="{{$getSetting->city}}" class="form-control" placeholder="Enter City Name">
                             @error('city')
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -60,6 +65,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group ">
+                            <label class="form-label">Street :</label>
                             <input type="text" name="street"  value="{{$getSetting->street}}" class="form-control" placeholder="Enter Street Name">
                             @error('street')
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -70,6 +76,7 @@
                 <div class="row ">
                     <div class="col-6">
                         <div class="form-group ">
+                            <label class="form-label">Facebook :</label>
                             <input type="text" name="facebook"  value="{{$getSetting->facebook}}" class="form-control" placeholder="Enter Facebook Link">
                             @error('facebook')
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -78,6 +85,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group ">
+                            <label class="form-label">Twitter :</label>
                             <input type="text" name="twitter"  value="{{$getSetting->twitter}}" class="form-control" placeholder="Enter twitter Link">
                             @error('twitter')
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -89,6 +97,7 @@
                 <div class="row ">
                     <div class="col-6">
                         <div class="form-group ">
+                            <label class="form-label">Instagram :</label>
                             <input type="text" name="instagram"  value="{{$getSetting->instagram}}" class="form-control" placeholder="Enter instagram Link">
                             @error('instagram')
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -97,6 +106,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group ">
+                            <label class="form-label">Youtube :</label>
                             <input type="youtube" name="youtube"  value="{{$getSetting->youtube}}" class="form-control" placeholder="Enter youtube Link">
                             @error('youtube')
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -107,6 +117,7 @@
                 <div class="row ">
                     <div class="col-12">
                         <div class="form-group ">
+                            <label class="form-label">Small Description :</label>
                             <textarea type="text"  name="small_desc" class="form-control"
                                 placeholder="Enter Small Description"> {{$getSetting->small_desc}}</textarea>
                             @error('small_desc')

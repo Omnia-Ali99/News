@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
 
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' =>[ 'auth:admin','CheckAdminStatus']], function () {
 
     Route::fallback(function(){
         return response()->view('errors.404');
@@ -98,7 +98,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
         Route::get('/','index' )->name('index');
         Route::post('/delete','delete')->name('delete');
         Route::get('/delete-all','deleteAll')->name('deleteAll');
-
-
     });
+
 });
+
+Route ::get('admin/wait',function(){
+    return view('admin.wait');
+})->name('admin.wait'); 

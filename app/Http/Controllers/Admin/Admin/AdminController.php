@@ -104,7 +104,12 @@ class AdminController extends Controller
     public function update(AdminRequest $request, string $id)
     {
         $admin = Admin::findOrFail($id);
-        $admin = $admin->update($request->except(['_token']));
+        
+        if($request->password){
+            $admin = $admin->update($request->except(['_token' ,'password_confirmation']));
+        }else{
+            $admin = $admin->update($request->except(['_token' ,'password','password_confirmation']));
+        }
         if(!$admin){
             return redirect()->back()->with('error',value: 'Try Again Latter!');
         }
