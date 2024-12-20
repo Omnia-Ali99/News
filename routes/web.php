@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialiteLoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
@@ -94,4 +95,7 @@ Route::prefix('email')->name('verification.')->controller(VerificationController
 });
   
 Auth::routes();
+
+Route::get('auth/{provider}/redirect',[SocialiteLoginController::class,'redirect'])->name('auth.socilate.redirect');
+Route::get('auth/{provider}/callback',[SocialiteLoginController::class,'callback'])->name('auth.socilate.callback');
 
