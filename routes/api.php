@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Generalcontroller;
+use App\Http\Controllers\Api\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('posts',[Generalcontroller::class,'getPosts']);
 Route::get('post/show/{slug}',[Generalcontroller::class,'showPost']);
+
+Route::get('settings',[SettingController::class,'getSettings']);
