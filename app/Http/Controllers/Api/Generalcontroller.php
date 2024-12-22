@@ -18,6 +18,10 @@ class Generalcontroller extends Controller
 
         $query = Post::query()->with(['user', 'category', 'admin', 'images'])->activeUser()->activeCategory()->active();
 
+        if(request()->query('keyword')){
+            $query->where('title','LIKE','%'.request()->query('keyword') .'%');
+        }
+        
         $clonedQuery = clone $query;
 
 
