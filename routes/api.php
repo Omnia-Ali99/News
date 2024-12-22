@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\Generalcontroller;
 use App\Http\Controllers\Api\SettingController;
 use Illuminate\Http\Request;
@@ -22,6 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('posts',[Generalcontroller::class,'getPosts']);
 Route::get('post/show/{slug}',[Generalcontroller::class,'showPost']);
 Route::get('post/comments/{slug}',[Generalcontroller::class,'getPostComments']);
+Route::get('categories',[CategoryController::class,'getCategories']);
+Route::get('category/{slug}/posts',[CategoryController::class,'getCategoryPosts']);
+
 
 
 Route::get('settings',[SettingController::class,'getSettings']);
