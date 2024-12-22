@@ -31,8 +31,6 @@ class PostResource extends JsonResource
             $data['comment_able'] = $this->comment_able == 1 ? 'active' :'inactive';
             $data['small_desc']   = $this->small_desc;
             $data['category']     = new CategoryResource($this->category);
-
-
         }
         return $data;
     }

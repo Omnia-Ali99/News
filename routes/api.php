@@ -21,5 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('posts',[Generalcontroller::class,'getPosts']);
 Route::get('post/show/{slug}',[Generalcontroller::class,'showPost']);
+Route::get('post/comments/{slug}',[Generalcontroller::class,'getPostComments']);
+
 
 Route::get('settings',[SettingController::class,'getSettings']);

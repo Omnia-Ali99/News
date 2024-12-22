@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\CommentCollection;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Category;
@@ -101,5 +102,22 @@ class Generalcontroller extends Controller
         }
 
         return apiResponse(200, 'this is post', PostResource::make($post));
+    }
+
+    public function getPostComments($sulg)
+    {
+        $post = Post::activeUser()
+        ->activeCategory()
+        ->active()
+        ->whereSlug($sulg)
+        ->first();
+        if (!$post) {
+            return apiResponse(404, 'posts not found');
+        }
+        $comments =$post->comments;
+        if (!$comments) {
+            return apiResponse(404, 'comments not found');
+        }
+        return apiResponse(200,'this post comments',new CommentCollection($comments));
     }
 }
