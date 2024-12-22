@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\setting;
+namespace App\Http\Controllers\admin\Setting;
 
 use App\Models\Setting;
 use App\Utils\ImageManger;

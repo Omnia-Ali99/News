@@ -46,7 +46,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::select('id','name')->get();
+        $categories = Category::activeCat()->select('id','name')->get();
         return view('admin.posts.create',['categories'=>$categories]);
 
     }

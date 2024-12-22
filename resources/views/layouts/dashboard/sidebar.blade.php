@@ -159,6 +159,8 @@
              <div class="bg-white py-2 collapse-inner rounded">
                  <h6 class="collapse-header">Setting Management:</h6>
                  <a class="collapse-item" href="{{ route('admin.settings.index') }}">Setting</a>
+                 <a class="collapse-item" href="{{ route('admin.related-site.index') }}">Related Site</a>
+
              </div>
          </div>
      </li>

@@ -12,7 +12,8 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Notification\NotificationController;
 use App\Http\Controllers\Admin\Post\PostController;
 use App\Http\Controllers\Admin\Profile\ProfileController;
-use App\Http\Controllers\admin\setting\SettingController;
+use App\Http\Controllers\Admin\Setting\RelatedSiteController;
+use App\Http\Controllers\admin\Setting\SettingController;
 use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +68,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' =>[ 'auth:admi
     Route::resource('categories', CategoryController::class);
     Route::resource('posts', PostController::class);
     Route::resource('admins', AdminController::class);
+    Route::resource('related-site', RelatedSiteController::class);
+
 
 
 
