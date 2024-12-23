@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\loginController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\Generalcontroller;
@@ -18,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::post('auth/login',[loginController::class,'login']);
+Route::delete('auth/logout',[loginController::class,'logout'])->middleware('auth:sanctum');
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
