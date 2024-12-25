@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\loginController;
+use App\Http\Controllers\Api\Auth\Password\ForgotPasswordController;
+use App\Http\Controllers\Api\Auth\Password\ResetPasswordController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\VerifyEmailController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\Generalcontroller;
+use App\Http\Controllers\Api\RelatedNewsController;
 use App\Http\Controllers\Api\SettingController;
+use App\Http\Resources\UserResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +32,14 @@ Route::controller(loginController::class)->group(function () {
     Route::delete('auth/logout', 'logout')->middleware('auth:sanctum');
 });
 
+Route::controller(ForgotPasswordController::class)->group(function () {
+    Route::post('password/email', 'sendOtp');
+});
+
+Route::controller(ResetPasswordController::class)->group(function () {
+    Route::post('password/reset', 'resetPassword');
+});
+
 
 Route::controller(VerifyEmailController::class)->middleware('auth:sanctum')->group(function () {
     Route::post('auth/verify/email', 'verifyEmail');
@@ -36,7 +48,7 @@ Route::controller(VerifyEmailController::class)->middleware('auth:sanctum')->gro
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return UserResource::Make($request->user());
 });
 
 
@@ -55,3 +67,5 @@ Route::post('contacts/store', [ContactController::class, 'storeContact']);
 
 
 Route::get('settings', [SettingController::class, 'getSettings']);
+
+Route::get('related-sites', RelatedNewsController::class);
