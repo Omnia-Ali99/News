@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\loginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\Auth\VerifyEmailController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\Generalcontroller;
@@ -20,23 +21,37 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::post('auth/register', [RegisterController::class, 'register']);
 
-Route::post('auth/login',[loginController::class,'login']);
-Route::delete('auth/logout',[loginController::class,'logout'])->middleware('auth:sanctum');
-Route::post('auth/register',[RegisterController::class,'register']);
+Route::controller(loginController::class)->group(function () {
+    Route::post('auth/login', 'login');
+    Route::delete('auth/logout', 'logout')->middleware('auth:sanctum');
+});
+
+
+Route::controller(VerifyEmailController::class)->middleware('auth:sanctum')->group(function () {
+    Route::post('auth/verify/email', 'verifyEmail');
+    Route::get('auth/verify/send-again', 'sendOtpAgain');
+});
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('posts/{keyword?}',[Generalcontroller::class,'getPosts']);
-Route::get('post/show/{slug}',[Generalcontroller::class,'showPost']);
-Route::get('post/comments/{slug}',[Generalcontroller::class,'getPostComments']);
-
-Route::get('categories',[CategoryController::class,'getCategories']);
-Route::get('category/{slug}/posts',[CategoryController::class,'getCategoryPosts']);
-
-Route::post('contacts/store',[ContactController::class,'storeContact']);
 
 
-Route::get('settings',[SettingController::class,'getSettings']);
+Route::controller(Generalcontroller::class)->group(function () {
+    Route::get('posts/{keyword?}', 'getPosts');
+    Route::get('post/show/{slug}', 'showPost');
+    Route::get('post/comments/{slug}', 'getPostComments');
+});
+
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('categories', 'getCategories');
+    Route::get('category/{slug}/posts', 'getCategoryPosts');
+});
+
+Route::post('contacts/store', [ContactController::class, 'storeContact']);
+
+
+Route::get('settings', [SettingController::class, 'getSettings']);
