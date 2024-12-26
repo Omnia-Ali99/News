@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Account\SettingController as AccountSettingController;
 use App\Http\Controllers\Api\Auth\loginController;
 use App\Http\Controllers\Api\Auth\Password\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\Password\ResetPasswordController;
@@ -47,8 +48,13 @@ Route::controller(VerifyEmailController::class)->middleware('auth:sanctum')->gro
 });
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return UserResource::Make($request->user());
+Route::middleware('auth:sanctum')->prefix('account')->group(function(){
+    Route::get('user',function(){
+        return UserResource::Make(auth()->user());
+    });
+    Route::put('setting/{user_id}',[AccountSettingController::class,'updateSetting']);
+    Route::put('password/{user_id}',[AccountSettingController::class,'updatePassword']);
+
 });
 
 

@@ -49,6 +49,11 @@
                         <input name="image" type="file" id="profile-image" accept="image/*" />
                     </div>
                     <div class="form-group">
+                        <img id="profile_image" class="img-thumbnail"
+                        src="{{ asset($user->image) }}" width="180px">
+                    </div>
+
+                    <div class="form-group">
                         <label for="country">Country:</label>
                         <input name="country" type="text" id="country" placeholder="Enter your country"
                             value="{{ $user->country }}" />
@@ -121,3 +126,21 @@
 
     <!-- Dashboard End-->
 @endsection
+@push('js')
+<script>
+    $(document).on('change', '#profile-image', function(e) {
+        e.preventDefault();
+        var file = this.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#profile_image').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
+@endpush

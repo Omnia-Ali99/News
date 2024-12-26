@@ -20,7 +20,7 @@ class UserResource extends JsonResource
             'created_date'=>$this->created_at->diffForHumans(),
         ];
         
-        if($request->is('api/user')){
+        if($request->is('api/account/user')){
             $data['user_id'] = $this->id;
             $data['username'] = $this->username;
             $data['email'] = $this->email;
