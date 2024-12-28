@@ -99,16 +99,14 @@
                              style="width: 300px;">
                              <h6 class="dropdown-header">Notifications</h6>
                              @forelse (auth()->user()->unreadNotifications()->take(5)->get()  as $notify)
-                                 <div id="push-notification">
                                      <div id="push-notification">
                                          <div class="dropdown-item d-flex justify-content-between align-items-center">
                                              <span> Post Comment :
                                                  {{ substr($notify->data['post_title'], 0, 9) }}...</span>
-                                             <a href="{{ $notify->data['link'] }}?notify={{ $notify->id }}">
+                                             <a href="{{route('frontend.post.show' ,$notify->data['post_slug'] )}}?notify={{ $notify->id }}">
                                                  <i class="fa fa-eye"></i></a>
                                          </div>
                                      </div>
-                                 </div>
                              @empty
                                  <div class="dropdown-item text-center">No notifications</div>
                              @endforelse

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Notifications\NewCommentNotify;
@@ -37,13 +38,9 @@ class PostController extends Controller
 
     }
    
-    public function saveComment(Request $request){
+    public function saveComment(CommentRequest $request){
 
-        $request->validate([
-            'user_id'=>['required','exists:users,id'],
-            'comment'=>['required','string','max:200'],
-        ]);
-       
+     
         $comment = Comment::create([
             'user_id'=>$request->user_id,
             'comment'=>$request->comment,
@@ -52,7 +49,8 @@ class PostController extends Controller
         ]);
 
         $post = Post::findOrFail($request->post_id);
-        if(auth()->user()->id != $request->user_id){
+        
+        if(auth()->user()->id != $post->user_id){
             $post->user->notify(new NewCommentNotify($comment,$post));
         }
      

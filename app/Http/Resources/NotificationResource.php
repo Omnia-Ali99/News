@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CommentResource extends JsonResource
+class NotificationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +15,13 @@ class CommentResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'comment'=>$this->comment,
-            'user_name'=>$this->user->name,
-            'user_image'=>$this->user->image,
+            'id' =>$this->id,
+            'type' =>$this->type,
+            'user_name' =>$this->data['user_name'],
+            'post_title' =>$this->data['post_title'],
+            'comment' =>$this->data['comment'],
+            'post_slug' =>$this->data['post_slug'],
             'created_date'=>$this->created_at->diffForHumans(),
-
         ];
     }
 }

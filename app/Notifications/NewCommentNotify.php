@@ -62,9 +62,7 @@ class NewCommentNotify extends Notification
             'user_name'=>auth()->user()->name,
             'post_title'=>$this->post->title,
             'comment'=>$this->comment->comment,
-            'link'=>route('frontend.post.show',$this->post->slug)
-
-
+            'post_slug'=>$this->post->slug,
         ];
     }
     public function toBroadcast(object $notifiable): array
@@ -74,9 +72,7 @@ class NewCommentNotify extends Notification
             'user_name'=>auth()->user()->name,
             'post_title'=>$this->post->title,
             'comment'=>$this->comment->comment,
-            'link'=>route('frontend.post.show',$this->post->slug)
-
-
+            'post_slug'=>$this->post->slug,
         ];
     }
 

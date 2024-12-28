@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\Account\NotificationController;
+use App\Http\Controllers\Api\Account\PostController;
 use App\Http\Controllers\Api\Account\SettingController as AccountSettingController;
 use App\Http\Controllers\Api\Auth\loginController;
 use App\Http\Controllers\Api\Auth\Password\ForgotPasswordController;
@@ -54,6 +56,18 @@ Route::middleware('auth:sanctum')->prefix('account')->group(function(){
     });
     Route::put('setting/{user_id}',[AccountSettingController::class,'updateSetting']);
     Route::put('password/{user_id}',[AccountSettingController::class,'updatePassword']);
+
+    Route::controller(PostController::class)->prefix('posts')->group(function(){
+        Route::get('/','getUserPosts');
+        Route::post('/store','storeUserPost');
+        Route::delete('/destroy/{post_id}','destroyUserPost');
+        Route::put('/update/{post_id}','updateUserPost');
+
+        Route::get('/{post_id}/comments','getPostComments');
+        Route::post('/comments/store','storeComment');
+    });
+
+    Route::get('notifications',[NotificationController::class,'getNotifications']);
 
 });
 

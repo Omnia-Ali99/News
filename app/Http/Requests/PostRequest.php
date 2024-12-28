@@ -21,17 +21,21 @@ class PostRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'title'=>['required','string','min:3','max:50'],
             'desc'=>['required','min:10'],
             'small_desc'=>['required' , 'min:3' , 'max:170'],
             'category_id'=>['exists:categories,id'],
             'comment_able'=>['in:on,off,1,0'],
-            'images'=>['required','array'],
             'images.*' =>['image','mimes:jpeg,png,jpg,gif'],
             'status'=>['in:1,0'],
-
-
         ];
+
+        if(in_array($this->method() , ['PUT' , 'PATCH'])){
+            $rules['images']              =['nullable' , 'array' ];
+        }else{
+            $rules['images'] = ['required','array'];
+        }
+        return $rules;
     }
 }

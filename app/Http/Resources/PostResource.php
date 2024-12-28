@@ -15,6 +15,7 @@ class PostResource extends JsonResource
     public function toArray(Request $request): array
     {
         $data = [
+            'id'=>$this->id,
             'title' =>$this->title,
             'slug' =>$this->slug,
             'num_of_views' =>$this->num_of_views,
@@ -23,6 +24,7 @@ class PostResource extends JsonResource
             'post_url'=>route('frontend.post.show',$this->slug),
             'publisher'=>$this->user_id == null ? new AdminResource($this->admin) : new UserResource($this->user),
             'media' =>ImageResource::collection($this->images),
+            'category_name' =>$this->category->name,
 
         ];
 

@@ -24,7 +24,7 @@ notification
                         </div>
                       </div>
                   @forelse (auth()->user()->notifications as $notify)
-                  <a href="{{ $notify->data['link'] }}?notify={{ $notify->id }}">
+                  <a href="{{ route('frontend.post.show' ,$notify->data['post_slug'] )}}?notify={{ $notify->id }}">
                     <div class="notification alert alert-info">
                         <strong>You have a notification form : {{$notify->data['user_name']}}</strong> Post title : {{$notify->data['post_title']}} <br>
                         {{$notify->created_at->diffForHumans()}}
