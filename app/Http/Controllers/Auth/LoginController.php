@@ -40,11 +40,20 @@ class LoginController extends Controller
         $this->middleware('auth')->only('logout');
     }
 
-    protected function loggedOut(Request $request)
+    protected function validateLogin(Request $request)
     {
-        Session::flash('success','You loged out');
-        return redirect()->route('frontend.index');
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+            'g-recaptcha-response' => 'required'
+        ],[
+           'g-recaptcha-response' =>[
+            'required' => 'Please verify that you are not a robot.',
+            ]
+        ]);
     }
+
+ 
     protected function authenticated(Request $request, $user)
     {
         Session::flash('success','You login successfully');
@@ -66,5 +75,11 @@ class LoginController extends Controller
           return $request->wantsJson()
               ? new JsonResponse([], 204)
               : redirect('/');
+      }
+
+      protected function loggedOut(Request $request)
+      {
+          Session::flash('success','You loged out');
+          return redirect()->route('frontend.index');
       }
 }

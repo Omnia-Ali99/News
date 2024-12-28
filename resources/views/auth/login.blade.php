@@ -74,8 +74,21 @@
                                     @endif
                                 </div>
                             </div>
-
-                            <br>
+                      
+                            <div class=" row  mt-3 mb-3" >
+                                <div class="col-md-8 offset-md-4">                   
+                                   {!! NoCaptcha::display() !!}
+                                </div>
+                            </div>
+                            <div class=" row mt-3 mb-3" >
+                                <div class="col-md-8 offset-md-4 ">                   
+                                    @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                @endif                           
+                                 </div>
+                            </div>
                             <div class="d-flex justify-content-center ">
                                 <div class="row ">
                                     <div class="col-6 ">
@@ -98,3 +111,7 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+{!! NoCaptcha::renderJs() !!}
+@endpush
