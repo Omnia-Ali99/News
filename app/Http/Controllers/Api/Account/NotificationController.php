@@ -20,4 +20,15 @@ class NotificationController extends Controller
             'unreadnotifications'=> NotificationResource::collection($unreadnotifications),
          ]);
     }
+
+    public function readNotifications($id){
+        $notification = auth::guard('sanctum')->user()->unreadNotifications()->where('id' ,$id)->first();
+        if(!$notification){
+            return apiResponse(404, 'Notification Not Found');
+        }  
+        $notification->markAsRead();
+        return apiResponse(400, 'Notification Read');
+
+  
+    }
 }

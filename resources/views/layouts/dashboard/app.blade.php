@@ -100,7 +100,7 @@
             adminId = "{{ auth('admin')->user()->id }}";
         </script>
     @endauth
-    <script src="{{ asset('build/assets/app-a9d49851.js') }}"></script>
+    <script src="{{ asset('build/assets/app-a27cd661.js') }}"></script>
     
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('assets/admin') }}/vendor/jquery/jquery.min.js"></script>
@@ -132,7 +132,7 @@
         adminId = "{{ auth('admin')->user()->id }}";
     </script>
 @endauth
-<script src="{{ asset('build/assets/app-472f4a01.js') }}"></script>
+<script src="{{ asset('build/assets/app-a27cd661.js') }}"></script>
     @stack('js')
     @livewireScripts
 </body>

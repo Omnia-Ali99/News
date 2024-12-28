@@ -38,11 +38,12 @@
 
     @auth
     <script>
-        role = "user";
-        userId = "{{ auth()->user()->id }}";
+      role = "user";
+      userId = "{{ auth()->user()->id }}";
+      showPostRoute ="route('frontend.post.show' ,':slug' )";
     </script>
 @endauth
-<script src="{{ asset('build/assets/app-472f4a01.js') }}"></script>
+<script src="{{ asset('build/assets/app-a27cd661.js') }}"></script>
 
     <!-- Breadcrumb Start -->
     <div class="breadcrumb-wrap">

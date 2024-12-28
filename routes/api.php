@@ -68,6 +68,8 @@ Route::middleware('auth:sanctum')->prefix('account')->group(function(){
     });
 
     Route::get('notifications',[NotificationController::class,'getNotifications']);
+    Route::get('notifications/read/{id}',[NotificationController::class,'readNotifications']);
+
 
 });
 
