@@ -100,7 +100,7 @@
             adminId = "{{ auth('admin')->user()->id }}";
         </script>
     @endauth
-    <script src="{{ asset('build/assets/app-a27cd661.js') }}"></script>
+    <script src="{{ asset('build/assets/app-e620a8e6.js') }}"></script>
     
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('assets/admin') }}/vendor/jquery/jquery.min.js"></script>

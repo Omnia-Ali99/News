@@ -26,7 +26,7 @@ class CheckSettingProvider extends ServiceProvider
                 'site_name'=>'news',
                 'email'=>'news@gmail.com',
                 'favicon'=>'default',
-                'logo'=>'/img/logo.png',
+                'logo'=>'/test/logo.png',
                 'facebook'=>'https://www.facebook.com',
                 'twitter'=>'https://www.twitter.com',
                 'instagram'=>'https://www.instagram.com',

@@ -43,7 +43,7 @@
       showPostRoute ="route('frontend.post.show' ,':slug' )";
     </script>
 @endauth
-<script src="{{ asset('build/assets/app-a27cd661.js') }}"></script>
+<script src="{{ asset('build/assets/app-e620a8e6.js') }}"></script>
 
     <!-- Breadcrumb Start -->
     <div class="breadcrumb-wrap">

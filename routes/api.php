@@ -50,7 +50,7 @@ Route::controller(VerifyEmailController::class)->middleware('auth:sanctum')->gro
 });
 
 
-Route::middleware(['auth:sanctum','CheckUserStatus'])->prefix('account')->group(function(){
+Route::middleware(['auth:sanctum','CheckUserStatus','verifyEmail'])->prefix('account')->group(function(){
     Route::get('user',function(){
         return UserResource::Make(auth()->user());
     });
