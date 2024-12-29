@@ -19,6 +19,12 @@ class CheckUserStatus
         if(Auth::guard('web')->check() && Auth::guard('web')->user()->status == 0){
             return redirect()->route('frontend.wait');
         }
+        if(Auth::guard('sanctum')->check() && Auth::guard('sanctum')->user()->status == 0){
+
+            Auth::guard('sanctum')->user()->currentAccessToken()->delete();
+            
+            return apiResponse(403 , 'You Are Bloked , Contact With Admin');
+                 }
         return $next($request);
     }
 }

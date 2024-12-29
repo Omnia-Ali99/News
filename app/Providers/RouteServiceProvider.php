@@ -45,8 +45,39 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting(): void
     {
+
+        $this->configureRateLimiter();
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+            return Limit::perMinute(20)->by($request->user()?->id ?: $request->ip())->response(function(){
+                return apiResponse(429,'Try After Minute');
+            });
         });
+
+    }
+
+    protected function configureRateLimiter(){
+
+        RateLimiter::for('Contact', function (Request $request) {
+
+            return Limit::perMinute(1)->by($request->ip())->response(function(){
+                return apiResponse(429,'Try After Minute');
+            });
+        });
+
+        RateLimiter::for('login', function (Request $request) {
+            return Limit::perMinute(2)->by($request->ip())->response(function () {
+                return apiResponse(429, 'Try After Minute');
+            });
+        });
+        RateLimiter::for('register', function (Request $request) {
+            return Limit::perMinute(2)->by($request->ip())->response(function () {
+                return apiResponse(429, 'Try After Minute');
+            });
+        });
+        RateLimiter::for('comments', function (Request $request) {
+            return Limit::perMinute(1)->by($request->ip())->response(function () {
+                return apiResponse(429, 'Try After Minute');
+            });
+        }); 
     }
 }

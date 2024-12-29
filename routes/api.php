@@ -28,9 +28,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::post('auth/register', [RegisterController::class, 'register']);
+Route::post('auth/register', [RegisterController::class, 'register'])->middleware('throttle:register');
 
-Route::controller(loginController::class)->group(function () {
+Route::controller(loginController::class)->middleware('throttle:login')->group(function () {
     Route::post('auth/login', 'login');
     Route::delete('auth/logout', 'logout')->middleware('auth:sanctum');
 });
@@ -50,7 +50,7 @@ Route::controller(VerifyEmailController::class)->middleware('auth:sanctum')->gro
 });
 
 
-Route::middleware('auth:sanctum')->prefix('account')->group(function(){
+Route::middleware(['auth:sanctum','CheckUserStatus'])->prefix('account')->group(function(){
     Route::get('user',function(){
         return UserResource::Make(auth()->user());
     });
@@ -64,7 +64,7 @@ Route::middleware('auth:sanctum')->prefix('account')->group(function(){
         Route::put('/update/{post_id}','updateUserPost');
 
         Route::get('/{post_id}/comments','getPostComments');
-        Route::post('/comments/store','storeComment');
+        Route::post('/comments/store','storeComment')->middleware('throttle:comments');
     });
 
     Route::get('notifications',[NotificationController::class,'getNotifications']);
@@ -85,7 +85,7 @@ Route::controller(CategoryController::class)->group(function () {
     Route::get('category/{slug}/posts', 'getCategoryPosts');
 });
 
-Route::post('contacts/store', [ContactController::class, 'storeContact']);
+Route::post('contacts/store', [ContactController::class, 'storeContact'])->middleware('throttle:Contact');
 
 
 Route::get('settings', [SettingController::class, 'getSettings']);
