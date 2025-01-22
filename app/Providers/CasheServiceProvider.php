@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class CasheServiceProvider extends ServiceProvider
@@ -21,7 +23,11 @@ class CasheServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
+        if (!Schema::hasTable('posts')) {
+            Log::error('The posts table is not available.');
+            return;
+      
+    }
         if(!(Cache::has('read_more_posts')))
         {
          $read_more_posts =Post::active()->select('slug','id','title')->latest()->limit(10)->get();
